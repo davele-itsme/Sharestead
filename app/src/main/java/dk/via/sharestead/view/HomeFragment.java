@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 
@@ -33,6 +34,7 @@ import dk.via.sharestead.webservices.GamesResponse;
 public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnListItemClickListener {
     private RecyclerViewAdapter adapter;
     private HomeViewModel homeViewModel;
+    private ProgressBar progressBar;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -45,11 +47,14 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home_fragment, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        progressBar = view.findViewById(R.id.progressBar);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         adapter = new RecyclerViewAdapter(this);
@@ -61,11 +66,9 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         ImageView img = view.findViewById(R.id.gameImage);
 
         //Triggered when data in LiveData is changed
-        homeViewModel.getGames().observe(getViewLifecycleOwner(), new Observer<Game>() {
-            @Override
-            public void onChanged(Game games) {
-                adapter.setGames(games);
-            }
+        homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
+            adapter.setGames(games);
+            progressBar.setVisibility(View.INVISIBLE);
         });
 
     }
