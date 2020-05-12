@@ -24,6 +24,7 @@ public class Game {
         this.genres = genres;
     }
 
-    public void setValue() {
+    public String getBackgroundImage() {
+        return backgroundImage;
     }
 }
