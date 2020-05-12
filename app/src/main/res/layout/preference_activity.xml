@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.PreferenceActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_weight="5">
+
+    <TextView
+        android:id="@+id/welcome1"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/preference_text_size"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/preference_welcome" />
+    <TextView
+        android:id="@+id/welcome2"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="60dp"
+        android:textSize="@dimen/preference_text_size_smaller"
+        android:text="@string/preference_tap" />
+</RelativeLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/platformSlider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:paddingStart="@dimen/padding_slider"
+        android:paddingEnd="@dimen/padding_slider"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6">
+
+        <Button
+            android:id="@+id/continueButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:onClick="explore"
+            android:text="@string/preference_explore"
+            android:textColor="@color/white"
+            android:textSize="@dimen/preference_text_size_smaller" />
+    </FrameLayout>
+
+
+</LinearLayout>

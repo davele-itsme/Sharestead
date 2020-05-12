@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Sharestead</string>
+    <string name="preference_welcome">What are you interested in?</string>
+    <string name="preference_tap">Tap to select platform/s.</string>
+    <string name="preference_explore">Explore</string>
+    <string name="home">Home</string>
+    <string name="share">Share</string>
+    <string name="wishes">Wishes</string>
+    <string name="messages">Messages</string>
+    <string name="profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

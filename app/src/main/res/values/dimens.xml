@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_slider">30dp</dimen>
+    <dimen name="preference_text_size">25sp</dimen>
+    <dimen name="preference_text_size_smaller">20sp</dimen>
+    <dimen name="corner_radius">10dp</dimen>
+</resources>
