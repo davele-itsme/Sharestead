@@ -8,20 +8,19 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import dk.via.sharestead.model.Game;
 import dk.via.sharestead.repository.HomeRepository;
 import dk.via.sharestead.webservices.GamesResponse;
 
 public class HomeViewModel extends AndroidViewModel {
-    private LiveData<GamesResponse> games;
     private HomeRepository homeRepository;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
         homeRepository = HomeRepository.getInstance(application);
-        games = homeRepository.getGames();
     }
 
-    public LiveData<GamesResponse> getGames() {
-        return games;
+    public LiveData<Game> getGames() {
+        return homeRepository.getGames();
     }
 }

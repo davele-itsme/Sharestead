@@ -8,29 +8,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 //Generating Web API using Retrofit
 public class ServiceGenerator {
-    private static ServiceGenerator instance;
-    private GamesAPI gamesAPI;
     private static final String BASE_URL = "https://api.rawg.io/api/";
+    private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create());
 
-    public ServiceGenerator() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        gamesAPI = retrofit.create(GamesAPI.class);
+    private static Retrofit retrofit = retrofitBuilder.build();
+
+    private static GamesAPI gamesAPI = retrofit.create(GamesAPI.class);
+
+    public static GamesAPI getGamesAPI() {
+        return gamesAPI;
     }
-
-    public static ServiceGenerator getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new ServiceGenerator();
-        }
-        return instance;
-    }
-
-    public Call<GamesResponse> getGames(){
-        return gamesAPI.getGames();
-    }
-
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -12,10 +13,17 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.adapter.RecyclerViewAdapter;
+import dk.via.sharestead.model.Game;
 import dk.via.sharestead.viewmodel.HomeViewModel;
+import dk.via.sharestead.webservices.GamesResponse;
 
 
 /**
@@ -34,6 +42,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home_fragment, container, false);
     }
@@ -49,18 +58,15 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
 
-        //Triggered when data in LiveData is changed
-        try {
-            homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
-                //Update Recycler View
-                adapter.setGames(games);
-            });
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        ImageView img = view.findViewById(R.id.gameImage);
 
+        //Triggered when data in LiveData is changed
+        homeViewModel.getGames().observe(getViewLifecycleOwner(), new Observer<Game>() {
+            @Override
+            public void onChanged(Game games) {
+                adapter.setGames(games);
+            }
+        });
 
     }
 

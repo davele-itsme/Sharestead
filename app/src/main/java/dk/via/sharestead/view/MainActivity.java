@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, currentFragment);
         ft.commit();
-        Toast.makeText(this, "CLICKED", Toast.LENGTH_SHORT).show();
     }
 
 
