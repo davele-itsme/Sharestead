@@ -6,7 +6,9 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dk.via.sharestead.model.Game;
 import dk.via.sharestead.webservices.GamesAPI;
@@ -34,25 +36,6 @@ public class HomeRepository {
             instance = new HomeRepository(application);
         }
         return instance;
-    }
-
-    private void requestGamesByPreference(int id) {
-        Call<GamesResponse> call = gamesAPI.getGamesByPreference();
-        call.enqueue(new Callback<GamesResponse>() {
-            @Override
-            public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
-                if (response.code() == 200 && response.body() != null) {
-                    games.setValue(response.body().getGames());
-                } else {
-                    Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GamesResponse> call, Throwable t) {
-                Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     public void requestVRGames() {
@@ -93,7 +76,29 @@ public class HomeRepository {
                 Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    private void requestGamesByPreference(int id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("platforms", id);
+        map.put("ordering", "-added");
+        map.put("dates", "2016-09-01,2020-09-30");
+        Call<GamesResponse> call = gamesAPI.getGamesByPreference(map);
+        call.enqueue(new Callback<GamesResponse>() {
+            @Override
+            public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    games.setValue(response.body().getGames());
+                } else {
+                    Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GamesResponse> call, Throwable t) {
+                Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public LiveData<List<Game>> getGames() {

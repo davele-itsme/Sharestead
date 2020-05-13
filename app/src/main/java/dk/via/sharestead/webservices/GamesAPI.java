@@ -1,15 +1,15 @@
 package dk.via.sharestead.webservices;
 
-import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface GamesAPI {
     //asynchronous calls
-    @GET("games?ordering=-rating")
-    Call<GamesResponse> getGamesByPreference();
+    @GET("games")
+    Call<GamesResponse> getGamesByPreference(@QueryMap Map<String, Object> map);
 
     @GET("games?tags=vr&ordering=-rating")
     Call<GamesResponse> getVRGames();

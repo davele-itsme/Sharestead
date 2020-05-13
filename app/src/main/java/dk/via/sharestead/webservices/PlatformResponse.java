@@ -9,12 +9,16 @@ public class PlatformResponse {
     public int getPlatformId(String platform) {
         int platformId = 0;
         for (PlatformValue platformValue : results) {
-            if(platformValue.name.equals(platform)){
+            if(platformValue.name.contains(platform)){
                 platformId = platformValue.id;
                 break;
             }
         }
         return platformId;
+    }
+
+    public List<PlatformValue> getResults() {
+        return results;
     }
 
     private class PlatformValue {
