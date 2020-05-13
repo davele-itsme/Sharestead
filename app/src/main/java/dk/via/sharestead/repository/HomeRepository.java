@@ -20,7 +20,7 @@ public class HomeRepository {
     private MutableLiveData<List<Game>> games;
     private static HomeRepository instance;
     private Application application;
-    
+
     public HomeRepository(Application application) {
         games = new MutableLiveData<>();
         this.application = application;
@@ -30,39 +30,35 @@ public class HomeRepository {
     }
 
     public static HomeRepository getInstance(Application application) {
-        if (instance == null)
-        {
+        if (instance == null) {
             instance = new HomeRepository(application);
         }
         return instance;
     }
 
-    public LiveData<List<Game>>getGames() {
-        return games;
+    private void requestGames() {
+        GamesAPI gamesAPI = ServiceGenerator.getGamesAPI();
+        Call<GamesResponse> call = gamesAPI.getBestRatedGames();
+        call.enqueue(new Callback<GamesResponse>() {
+            @Override
+            public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    games.setValue(response.body().getGames());
+                } else {
+                    Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GamesResponse> call, Throwable t) {
+                Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
-    private void requestGames(){
-        GamesAPI gamesAPI = ServiceGenerator.getGamesAPI();
-        Call<GamesResponse> call = gamesAPI.getGames();
-        call.enqueue(new Callback<GamesResponse>() {
-           @Override
-           public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
-               if(response.code() == 200)
-               {
-                   games.setValue(response.body().getGames());
-                   Toast.makeText(application, "IMAGE: " + games.getValue().get(0).getBackgroundImage(), Toast.LENGTH_SHORT).show();
-               }
-               else {
-                   Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
-               }
-           }
-
-           @Override
-           public void onFailure(Call<GamesResponse> call, Throwable t) {
-               Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-           }
-       });
-
+    public LiveData<List<Game>> getGames() {
+        return games;
     }
 }
 

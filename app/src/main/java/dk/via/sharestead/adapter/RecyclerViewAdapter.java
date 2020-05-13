@@ -41,9 +41,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull GameHolder holder, int position) {
-
-//        holder.textView.setText(games.getResults().get(position).getName());
         //VERY IMPORTANT TO HAVE HERE NULL, AS IT TAKES SOME TIME TO GET DATA AND INITIALIZING RECYCLER VIEW IS FASTER< THANKS TO WHICH IT WILL GET AN EXCEPTION OF NULL POINTER
+        position++;
         if(games != null)
         {
             String image = games.get(position).getBackgroundImage();
@@ -56,7 +55,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return 15;
+        if(games != null)
+        {
+            return 19;
+        }
+        return 0;
     }
 
     public void setGames(List<Game> games) {

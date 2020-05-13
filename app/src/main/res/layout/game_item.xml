@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:elevation="10dp"
+
     android:orientation="vertical"
     app:cardCornerRadius="3dp">
 
@@ -31,9 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:text="TEXT"
-            android:textSize="10sp" />
+            android:layout_margin="10dp"
+            android:text="@string/home"
+            android:textSize="@dimen/normal_text_size" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

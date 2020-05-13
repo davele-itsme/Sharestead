@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -15,15 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import java.util.List;
+import com.squareup.picasso.Picasso;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.adapter.RecyclerViewAdapter;
-import dk.via.sharestead.model.Game;
 import dk.via.sharestead.viewmodel.HomeViewModel;
-import dk.via.sharestead.webservices.GamesResponse;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,12 +58,15 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
 
-        ImageView img = view.findViewById(R.id.gameImage);
+        ImageView img = view.findViewById(R.id.game1Image);
+        TextView textView = view.findViewById(R.id.game1Name);
 
         //Triggered when data in LiveData is changed
         homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
             adapter.setGames(games);
             progressBar.setVisibility(View.INVISIBLE);
+            Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0,1000).into(img);
+            textView.setText(games.get(0).getName());
         });
 
     }

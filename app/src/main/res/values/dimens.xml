@@ -4,4 +4,6 @@
     <dimen name="preference_text_size">25sp</dimen>
     <dimen name="preference_text_size_smaller">20sp</dimen>
     <dimen name="corner_radius">10dp</dimen>
+    <dimen name="normal_text_size">12sp</dimen>
+    <dimen name="title_text_size">16sp</dimen>
 </resources>
