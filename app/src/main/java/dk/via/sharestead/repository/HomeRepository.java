@@ -68,7 +68,6 @@ public class HomeRepository {
                 if (response.code() == 200 && response.body() != null) {
                    requestGamesByPreference(response.body().getPlatformId(platform));
                    requestMoreGamesByPreference(response.body().getPlatformId(platform));
-                   Toast.makeText(application, "WORKS: " + response.body().getPlatformId(platform), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -115,7 +114,6 @@ public class HomeRepository {
             public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
                     moreGames.setValue(response.body().getGames());
-                    Toast.makeText(application, "SOMETHING: " + response.body().getGames().get(1).getName() , Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
