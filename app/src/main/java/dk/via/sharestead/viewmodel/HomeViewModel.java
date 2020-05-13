@@ -21,7 +21,7 @@ public class HomeViewModel extends AndroidViewModel {
         homeRepository = HomeRepository.getInstance(application);
     }
 
-    public LiveData<Game> getGames() {
+    public LiveData<List<Game>> getGames() {
         return homeRepository.getGames();
     }
 

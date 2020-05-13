@@ -17,7 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeRepository {
-    private MutableLiveData<Game> games;
+    private MutableLiveData<List<Game>> games;
     private static HomeRepository instance;
     private Application application;
     
@@ -37,7 +37,7 @@ public class HomeRepository {
         return instance;
     }
 
-    public LiveData<Game> getGames() {
+    public LiveData<List<Game>>getGames() {
         return games;
     }
 
@@ -49,9 +49,8 @@ public class HomeRepository {
            public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
                if(response.code() == 200)
                {
-                   games.setValue(response.body().getGame());
-//                   Toast.makeText(application, "Good: " + response.code(), Toast.LENGTH_SHORT).show();
-                   Toast.makeText(application, "Good: " + games.getValue().getCount(), Toast.LENGTH_SHORT).show();
+                   games.setValue(response.body().getGames());
+                   Toast.makeText(application, "IMAGE: " + games.getValue().get(0).getBackgroundImage(), Toast.LENGTH_SHORT).show();
                }
                else {
                    Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();

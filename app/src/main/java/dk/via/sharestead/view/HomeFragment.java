@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 import dk.via.sharestead.R;
@@ -57,7 +55,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         progressBar = view.findViewById(R.id.progressBar);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        adapter = new RecyclerViewAdapter(this);
+        adapter = new RecyclerViewAdapter(getContext(),this);
         adapter.setGames(homeViewModel.getGames().getValue());
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setAdapter(adapter);
