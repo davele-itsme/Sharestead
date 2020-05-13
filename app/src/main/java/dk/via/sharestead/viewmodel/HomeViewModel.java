@@ -14,15 +14,17 @@ import dk.via.sharestead.repository.HomeRepository;
 import dk.via.sharestead.webservices.GamesResponse;
 
 public class HomeViewModel extends AndroidViewModel {
+    LiveData<List<Game>> games;
     private HomeRepository homeRepository;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
         homeRepository = HomeRepository.getInstance(application);
+        games = homeRepository.getGames();
     }
 
     public LiveData<List<Game>> getGames() {
-        return homeRepository.getGames();
+        return games;
     }
 
 }
