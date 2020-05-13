@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         adapter = new RecyclerViewAdapter(getContext(),this);
-        adapter.setGames(homeViewModel.getGames().getValue());
+        adapter.setGameDetails(homeViewModel.getGames().getValue());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
 
@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
 
         //Triggered when data in LiveData is changed
         homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
-            adapter.setGames(games);
+            adapter.setGameDetails(games);
             progressBar.setVisibility(View.INVISIBLE);
             Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0,1000).into(img);
             textView.setText(games.get(0).getName());

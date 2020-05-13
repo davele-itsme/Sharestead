@@ -1,7 +1,6 @@
 package dk.via.sharestead.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -20,10 +19,11 @@ import java.util.List;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.model.Game;
+import dk.via.sharestead.model.GameDetails;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.GameHolder> {
     private OnListItemClickListener listener;
-    private List<Game> games;
+    private List<Game> gameDetails;
     private Context context;
     int imageHeight, imageWidth;
 
@@ -43,27 +43,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull GameHolder holder, int position) {
         //VERY IMPORTANT TO HAVE HERE NULL, AS IT TAKES SOME TIME TO GET DATA AND INITIALIZING RECYCLER VIEW IS FASTER< THANKS TO WHICH IT WILL GET AN EXCEPTION OF NULL POINTER
         position++;
-        if(games != null)
+        if(gameDetails != null)
         {
-            String image = games.get(position).getBackgroundImage();
+            String image = gameDetails.get(position).getBackgroundImage();
             Uri myUri = Uri.parse(image);
             getIMGSize(myUri);
             Picasso.with(context).load(image).resize(0, 800).into(holder.imageView);
-            holder.textView.setText(games.get(position).getName());
+            holder.textView.setText(gameDetails.get(position).getName());
         }
     }
 
     @Override
     public int getItemCount() {
-        if(games != null)
+        if(gameDetails != null)
         {
             return 19;
         }
         return 0;
     }
 
-    public void setGames(List<Game> games) {
-        this.games = games;
+    public void setGameDetails(List<Game> gameDetails) {
+        this.gameDetails = gameDetails;
         notifyDataSetChanged();
     }
 

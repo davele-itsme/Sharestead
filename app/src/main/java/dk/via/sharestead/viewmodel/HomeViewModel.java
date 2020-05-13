@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import dk.via.sharestead.model.Game;
+import dk.via.sharestead.model.GameDetails;
 import dk.via.sharestead.repository.HomeRepository;
 
 
