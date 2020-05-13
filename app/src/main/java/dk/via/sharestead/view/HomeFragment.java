@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home_fragment, container, false);
 
@@ -55,6 +56,12 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TextView mainTitle = view.findViewById(R.id.exploreTitle);
+        TextView recentGamesTitle = view.findViewById(R.id.bestGamesTitle);
+        TextView upcomingGamesTitle = view.findViewById(R.id.bestUpcomingTitle);
+        mainTitle.setVisibility(View.INVISIBLE);
+        recentGamesTitle.setVisibility(View.INVISIBLE);
+        upcomingGamesTitle.setVisibility(View.INVISIBLE);
 
         progressBar = view.findViewById(R.id.progressBar);
 
@@ -73,12 +80,18 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         TextView textView = view.findViewById(R.id.game1Name);
 
         //Triggered when data in LiveData is changed
-        homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
+        homeViewModel.getRecentGames().observe(getViewLifecycleOwner(), games -> {
             gridAdapter.setGames(games);
-            horizontalAdapter.setGames(games);
             progressBar.setVisibility(View.INVISIBLE);
             Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0, 1000).into(img);
             textView.setText(games.get(0).getName());
+            mainTitle.setVisibility(View.VISIBLE);
+            recentGamesTitle.setVisibility(View.VISIBLE);
+            upcomingGamesTitle.setVisibility(View.VISIBLE);
+        });
+
+        homeViewModel.getUpcomingGames().observe(getViewLifecycleOwner(), games -> {
+            horizontalAdapter.setGames(games);
         });
 
 

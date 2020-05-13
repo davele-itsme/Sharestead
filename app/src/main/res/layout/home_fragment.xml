@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/exploreTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -36,14 +36,13 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginBottom="60dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/game1Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
                     android:fontFamily="@font/open_sans_bold"
                     android:textSize="@dimen/title_text_size" />
 
@@ -54,13 +53,33 @@
                     android:contentDescription="@string/description_recommended_main_game"
                     android:scaleType="centerCrop" />
 
+                <TextView
+                    android:id="@+id/bestGamesTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="@string/best_recent_games"
+                    android:textSize="@dimen/title_text_size" />
+
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/gridRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="4dp" />
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:id="@+id/bestUpcomingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/best_upcoming_games"
+                android:textSize="@dimen/title_text_size" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/horizontalRecyclerView"
@@ -68,8 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="60dp"/>
+                android:layout_marginBottom="80dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

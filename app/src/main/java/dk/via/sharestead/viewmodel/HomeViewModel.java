@@ -9,22 +9,19 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import dk.via.sharestead.model.Game;
-import dk.via.sharestead.model.GameDetails;
 import dk.via.sharestead.repository.HomeRepository;
 
 
 public class HomeViewModel extends AndroidViewModel {
-    LiveData<List<Game>> games;
+    private LiveData<List<Game>> recentGames;
+    private LiveData<List<Game>> upcomingGames;
     private HomeRepository homeRepository;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
         homeRepository = HomeRepository.getInstance(application);
-        games = homeRepository.getGames();
-    }
-
-    public LiveData<List<Game>> getGames() {
-        return games;
+        recentGames = homeRepository.getRecentGames();
+        upcomingGames = homeRepository.getUpcomingGames();
     }
 
     public void setPlatformGames(String platformPreference) {
@@ -41,12 +38,20 @@ public class HomeViewModel extends AndroidViewModel {
                     newPlatform = "PlayStation";
                     break;
                 case "MOBILE":
-                    newPlatform = "Android";
+                    newPlatform = "iOS";
                     break;
             }
 
             homeRepository.requestPlatformId(newPlatform);
         }
 
+    }
+
+    public LiveData<List<Game>> getRecentGames() {
+        return recentGames;
+    }
+
+    public LiveData<List<Game>> getUpcomingGames() {
+        return upcomingGames;
     }
 }

@@ -10,6 +10,8 @@
     <string name="profile">Profile</string>
     <string name="home_text">Explore recommended games</string>
     <string name="description_recommended_main_game">Recommended popular game</string>
+    <string name="best_recent_games">Cool recent games</string>
+    <string name="best_upcoming_games">The most anticipated upcoming games</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -48,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             holder.textView.setText(games.get(position).getName());
             if(type.equals("horizontal"))
             {
-                Picasso.with(context).load(image).centerCrop().resize(500, 400).into(holder.imageView);
+                Picasso.with(context).load(image).resize(0, 250).into(holder.imageView);
             }
             else {
                 Picasso.with(context).load(image).resize(0, 800).into(holder.imageView);
@@ -60,7 +60,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         if(games != null)
         {
-            return 17;
+            return 13;
         }
         return 0;
     }
