@@ -1,5 +1,7 @@
 package dk.via.sharestead.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     private RecyclerViewAdapter adapter;
     private HomeViewModel homeViewModel;
     private ProgressBar progressBar;
+    private StaggeredGridLayoutManager manager;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -39,7 +42,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-
+        manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home_fragment, container, false);
 
@@ -54,7 +57,6 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         adapter = new RecyclerViewAdapter(getContext(),this);
         adapter.setGames(homeViewModel.getGames().getValue());
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
 
@@ -69,6 +71,14 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
             textView.setText(games.get(0).getName());
         });
 
+        setPlatformGames();
+
+    }
+
+    private void setPlatformGames() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+        String platformPreference = sharedPreferences.getString("platformPreference", "Platform");
+        homeViewModel.setPlatformGames(platformPreference);
     }
 
 

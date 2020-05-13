@@ -26,4 +26,26 @@ public class HomeViewModel extends AndroidViewModel {
         return games;
     }
 
+    public void setPlatformGames(String platformPreference) {
+        if (platformPreference.equals("VIRTUAL REALITY")) {
+            homeRepository.requestVRGames();
+        } else {
+            //Set string so that it matches string in webservices and can find the right platform
+            String newPlatform = "";
+            switch (platformPreference) {
+                case "COMPUTER":
+                    newPlatform = "PC";
+                    break;
+                case "CONSOLE":
+                    newPlatform = "PlayStation 5";
+                    break;
+                case "MOBILE":
+                    newPlatform = "Android";
+                    break;
+            }
+
+            homeRepository.requestPlatformId(newPlatform);
+        }
+
+    }
 }

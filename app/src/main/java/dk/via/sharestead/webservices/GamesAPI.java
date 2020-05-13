@@ -8,15 +8,13 @@ import retrofit2.http.Query;
 
 public interface GamesAPI {
     //asynchronous calls
-    @GET("games")
-    Call<List<GamesResponse>> getBestRatedGames(@Query("name") String name);
-
     @GET("games?ordering=-rating")
-    Call<GamesResponse> getBestRatedGames();
+    Call<GamesResponse> getGamesByPreference();
 
     @GET("games?tags=vr&ordering=-rating")
     Call<GamesResponse> getVRGames();
 
+    @GET("platforms")
     Call<PlatformResponse> getPlatformId();
 
 }
