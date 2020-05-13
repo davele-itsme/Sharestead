@@ -15,6 +15,7 @@
         android:layout_margin="16dp"
         android:layout_gravity="bottom"
         android:background="@drawable/bottom_navigation_background"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         android:elevation="8dp"
         app:itemIconTint="@drawable/bottom_navigation_color_selector"
         app:labelVisibilityMode="unlabeled"
