@@ -60,7 +60,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="50dp"
                     android:fontFamily="@font/open_sans_bold"
-                    android:text="@string/best_recent_games"
+                    android:text="@string/best_games"
                     android:textSize="@dimen/title_text_size" />
 
             </LinearLayout>
@@ -78,7 +78,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/open_sans_bold"
-                android:text="@string/best_upcoming_games"
+                android:text="@string/best_more_games"
                 android:textSize="@dimen/title_text_size" />
 
             <androidx.recyclerview.widget.RecyclerView

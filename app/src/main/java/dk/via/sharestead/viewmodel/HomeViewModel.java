@@ -13,15 +13,15 @@ import dk.via.sharestead.repository.HomeRepository;
 
 
 public class HomeViewModel extends AndroidViewModel {
-    private LiveData<List<Game>> recentGames;
-    private LiveData<List<Game>> upcomingGames;
+    private LiveData<List<Game>> games;
+    private LiveData<List<Game>> moreGames;
     private HomeRepository homeRepository;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
         homeRepository = HomeRepository.getInstance(application);
-        recentGames = homeRepository.getRecentGames();
-        upcomingGames = homeRepository.getUpcomingGames();
+        games = homeRepository.getGames();
+        moreGames = homeRepository.getMoreGames();
     }
 
     public void setPlatformGames(String platformPreference) {
@@ -47,11 +47,11 @@ public class HomeViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<Game>> getRecentGames() {
-        return recentGames;
+    public LiveData<List<Game>> getGames() {
+        return games;
     }
 
-    public LiveData<List<Game>> getUpcomingGames() {
-        return upcomingGames;
+    public LiveData<List<Game>> getMoreGames() {
+        return moreGames;
     }
 }

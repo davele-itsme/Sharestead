@@ -6,12 +6,10 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dk.via.sharestead.model.Developer;
 import dk.via.sharestead.model.Game;
 import dk.via.sharestead.webservices.GamesAPI;
 import dk.via.sharestead.webservices.GamesResponse;
@@ -22,15 +20,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeRepository {
-    private MutableLiveData<List<Game>> recentGames;
-    private MutableLiveData<List<Game>> upcomingGames;
+    private MutableLiveData<List<Game>> games;
+    private MutableLiveData<List<Game>> moreGames;
     private static HomeRepository instance;
     private Application application;
     private GamesAPI gamesAPI;
 
     public HomeRepository(Application application) {
-        recentGames = new MutableLiveData<>();
-        upcomingGames = new MutableLiveData<>();
+        games = new MutableLiveData<>();
+        moreGames = new MutableLiveData<>();
         this.application = application;
          gamesAPI = ServiceGenerator.getGamesAPI();
     }
@@ -49,7 +47,7 @@ public class HomeRepository {
             @Override
             public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-                    recentGames.setValue(response.body().getGames());
+                    games.setValue(response.body().getGames());
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -68,8 +66,8 @@ public class HomeRepository {
             @Override
             public void onResponse(Call<PlatformResponse> call, Response<PlatformResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-                   requestRecentGamesByPreference(response.body().getPlatformId(platform));
-                   requestUpcomingGamesByPreference(response.body().getPlatformId(platform));
+                   requestGamesByPreference(response.body().getPlatformId(platform));
+                   requestMoreGamesByPreference(response.body().getPlatformId(platform));
                    Toast.makeText(application, "WORKS: " + response.body().getPlatformId(platform), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
@@ -83,7 +81,7 @@ public class HomeRepository {
         });
     }
 
-    private void requestRecentGamesByPreference(int id) {
+    private void requestGamesByPreference(int id) {
         Map<String, Object> map = new HashMap<>();
         map.put("parent_platforms", id);
         map.put("ordering", "-added");
@@ -93,7 +91,7 @@ public class HomeRepository {
             @Override
             public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-                    recentGames.setValue(response.body().getGames());
+                    games.setValue(response.body().getGames());
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -106,16 +104,17 @@ public class HomeRepository {
         });
     }
 
-    private void requestUpcomingGamesByPreference(int id) {
+    private void requestMoreGamesByPreference(int id) {
         Map<String, Object> map = new HashMap<>();
         map.put("parent_platforms", id);
-        map.put("dates", "2020-05-02,2025-01-01");
+        map.put("page", 2);
+        map.put("dates", "2013-09-01,2020-05-01");
         Call<GamesResponse> call = gamesAPI.getGamesByPreference(map);
         call.enqueue(new Callback<GamesResponse>() {
             @Override
             public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-                    upcomingGames.setValue(response.body().getGames());
+                    moreGames.setValue(response.body().getGames());
                     Toast.makeText(application, "SOMETHING: " + response.body().getGames().get(1).getName() , Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
@@ -129,13 +128,13 @@ public class HomeRepository {
         });
     }
 
-    public LiveData<List<Game>> getRecentGames() {
-        return recentGames;
+    public LiveData<List<Game>> getGames() {
+        return games;
     }
 
 
-    public LiveData<List<Game>> getUpcomingGames() {
-        return  upcomingGames;
+    public LiveData<List<Game>> getMoreGames() {
+        return moreGames;
     }
 }
 

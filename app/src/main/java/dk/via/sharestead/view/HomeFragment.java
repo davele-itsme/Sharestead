@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         TextView textView = view.findViewById(R.id.game1Name);
 
         //Triggered when data in LiveData is changed
-        homeViewModel.getRecentGames().observe(getViewLifecycleOwner(), games -> {
+        homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
             gridAdapter.setGames(games);
             progressBar.setVisibility(View.INVISIBLE);
             Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0, 1000).into(img);
@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
             upcomingGamesTitle.setVisibility(View.VISIBLE);
         });
 
-        homeViewModel.getUpcomingGames().observe(getViewLifecycleOwner(), games -> {
+        homeViewModel.getMoreGames().observe(getViewLifecycleOwner(), games -> {
             horizontalAdapter.setGames(games);
         });
 
