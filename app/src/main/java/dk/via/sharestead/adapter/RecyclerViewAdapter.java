@@ -1,7 +1,6 @@
 package dk.via.sharestead.adapter;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,20 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.List;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.model.Game;
-import dk.via.sharestead.model.GameDetails;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.GameHolder> {
     private OnListItemClickListener listener;
-    private List<Game> gameDetails;
+    private List<Game> games;
     private Context context;
-    int imageHeight, imageWidth;
+    private String type;
 
-    public RecyclerViewAdapter(Context context, OnListItemClickListener listener) {
+
+    public RecyclerViewAdapter(String type, Context context, OnListItemClickListener listener) {
+        this.type = type;
         this.listener = listener;
         this.context = context;
     }
@@ -43,27 +42,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull GameHolder holder, int position) {
         //VERY IMPORTANT TO HAVE HERE NULL, AS IT TAKES SOME TIME TO GET DATA AND INITIALIZING RECYCLER VIEW IS FASTER< THANKS TO WHICH IT WILL GET AN EXCEPTION OF NULL POINTER
         position++;
-        if(gameDetails != null)
+        if(games != null)
         {
-            String image = gameDetails.get(position).getBackgroundImage();
-            Uri myUri = Uri.parse(image);
-            getIMGSize(myUri);
-            Picasso.with(context).load(image).resize(0, 800).into(holder.imageView);
-            holder.textView.setText(gameDetails.get(position).getName());
+            String image = games.get(position).getBackgroundImage();
+            holder.textView.setText(games.get(position).getName());
+            if(type.equals("horizontal"))
+            {
+                Picasso.with(context).load(image).centerCrop().resize(500, 400).into(holder.imageView);
+            }
+            else {
+                Picasso.with(context).load(image).resize(0, 800).into(holder.imageView);
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        if(gameDetails != null)
+        if(games != null)
         {
-            return 19;
+            return 17;
         }
         return 0;
     }
 
-    public void setGameDetails(List<Game> gameDetails) {
-        this.gameDetails = gameDetails;
+    public void setGames(List<Game> games) {
+        this.games = games;
         notifyDataSetChanged();
     }
 
@@ -88,15 +91,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public interface OnListItemClickListener {
         void onListItemClick(int clickedItemIndex);
-    }
-
-    private void getIMGSize(Uri uri){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(new File(uri.getPath()).getAbsolutePath(), options);
-        imageHeight = Math.abs(options.outHeight);
-        imageWidth = Math.abs(options.outWidth);
-
-
     }
 }

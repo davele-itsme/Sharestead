@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -29,10 +30,12 @@ import dk.via.sharestead.viewmodel.HomeViewModel;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnListItemClickListener {
-    private RecyclerViewAdapter adapter;
+    private RecyclerViewAdapter gridAdapter;
+    private RecyclerViewAdapter horizontalAdapter;
     private HomeViewModel homeViewModel;
     private ProgressBar progressBar;
-    private StaggeredGridLayoutManager manager;
+    private StaggeredGridLayoutManager gridLayoutManager;
+    private LinearLayoutManager horizontalLayoutManager;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -42,7 +45,8 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home_fragment, container, false);
 
@@ -54,22 +58,30 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
 
         progressBar = view.findViewById(R.id.progressBar);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        adapter = new RecyclerViewAdapter(getContext(),this);
-        adapter.setGameDetails(homeViewModel.getGames().getValue());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(manager);
+        RecyclerView gridRecyclerView = view.findViewById(R.id.gridRecyclerView);
+        RecyclerView horizontalRecyclerView = view.findViewById(R.id.horizontalRecyclerView);
+
+        gridAdapter = new RecyclerViewAdapter("grid", getContext(), this);
+        horizontalAdapter = new RecyclerViewAdapter("horizontal", getContext(), this);
+
+        gridRecyclerView.setAdapter(gridAdapter);
+        horizontalRecyclerView.setAdapter(horizontalAdapter);
+        gridRecyclerView.setLayoutManager(gridLayoutManager);
+        horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
 
         ImageView img = view.findViewById(R.id.game1Image);
         TextView textView = view.findViewById(R.id.game1Name);
 
         //Triggered when data in LiveData is changed
         homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
-            adapter.setGameDetails(games);
+            gridAdapter.setGames(games);
+            horizontalAdapter.setGames(games);
             progressBar.setVisibility(View.INVISIBLE);
-            Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0,1000).into(img);
+            Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0, 1000).into(img);
             textView.setText(games.get(0).getName());
         });
+
+
 
         setPlatformGames();
 

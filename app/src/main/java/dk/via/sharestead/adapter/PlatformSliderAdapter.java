@@ -25,7 +25,6 @@ public class PlatformSliderAdapter extends RecyclerView.Adapter<PlatformSliderAd
     public PlatformSliderAdapter(List<SliderItem> sliderItems, OnPlatformItemClickListener clickListener) {
         this.sliderItems = sliderItems;
         this.clickListener = clickListener;
-
     }
 
     @NonNull
