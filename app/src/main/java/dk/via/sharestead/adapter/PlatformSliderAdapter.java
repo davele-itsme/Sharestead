@@ -41,6 +41,7 @@ public class PlatformSliderAdapter extends RecyclerView.Adapter<PlatformSliderAd
         if (item.isSelected()) {
             holder.platformText.setTextColor(Color.parseColor("#0B9DDB"));
         } else {
+            item.setSelected(false);
             holder.platformText.setTextColor(Color.parseColor("#000000"));
         }
         holder.platformText.setText(item.getPlatformText());

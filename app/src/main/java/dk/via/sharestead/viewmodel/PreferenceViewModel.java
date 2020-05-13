@@ -41,4 +41,35 @@ public class PreferenceViewModel extends AndroidViewModel {
             sliderItem.setSelected(true);
         }
     }
+
+    public boolean verifyPlatforms() {
+        boolean oneTrue = false;
+        for(SliderItem sliderItem: sliderItems)
+        {
+            if(sliderItem.isSelected())
+            {
+                if(oneTrue)
+                {
+                    return false;
+                }
+                else {
+                    oneTrue = true;
+                }
+            }
+        }
+        return oneTrue;
+    }
+
+    public String getSelectedPlatform() {
+        String platform = "";
+        for(SliderItem sliderItem: sliderItems)
+        {
+            if(sliderItem.isSelected())
+            {
+                platform = sliderItem.getPlatformText();
+                break;
+            }
+        }
+        return platform;
+    }
 }
