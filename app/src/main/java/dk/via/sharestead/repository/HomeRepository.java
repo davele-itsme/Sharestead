@@ -6,10 +6,12 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dk.via.sharestead.model.Developer;
 import dk.via.sharestead.model.Game;
 import dk.via.sharestead.webservices.GamesAPI;
 import dk.via.sharestead.webservices.GamesResponse;
@@ -24,6 +26,7 @@ public class HomeRepository {
     private static HomeRepository instance;
     private Application application;
     private GamesAPI gamesAPI;
+    private ArrayList<Developer> developers = new ArrayList<>();
 
     public HomeRepository(Application application) {
         games = new MutableLiveData<>();
@@ -80,7 +83,7 @@ public class HomeRepository {
 
     private void requestGamesByPreference(int id) {
         Map<String, Object> map = new HashMap<>();
-        map.put("platforms", id);
+        map.put("parent_platforms", id);
         map.put("ordering", "-added");
         map.put("dates", "2016-09-01,2020-09-30");
         Call<GamesResponse> call = gamesAPI.getGamesByPreference(map);

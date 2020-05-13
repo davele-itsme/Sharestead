@@ -37,7 +37,7 @@ public class HomeViewModel extends AndroidViewModel {
                     newPlatform = "PC";
                     break;
                 case "CONSOLE":
-                    newPlatform = "Xbox";
+                    newPlatform = "PlayStation";
                     break;
                 case "MOBILE":
                     newPlatform = "Android";

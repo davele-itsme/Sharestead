@@ -14,7 +14,7 @@ public interface GamesAPI {
     @GET("games?tags=vr&ordering=-rating")
     Call<GamesResponse> getVRGames();
 
-    @GET("platforms")
+    @GET("platforms/lists/parents")
     Call<PlatformResponse> getPlatformId();
 
 }
