@@ -10,4 +10,8 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="AuthenticationTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
 </resources>

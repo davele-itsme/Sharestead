@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1044304214404",
+    "firebase_url": "https://sharestead-and.firebaseio.com",
+    "project_id": "sharestead-and",
+    "storage_bucket": "sharestead-and.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044304214404:android:5f9c5884db3bdd1d6705d1",
+        "android_client_info": {
+          "package_name": "dk.via.sharestead"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044304214404-ereo994vn2sbqovoe9ivg18kspep1335.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEXlOQN85UqGVAOQvaMMc3EpkNJWNeaL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044304214404-ereo994vn2sbqovoe9ivg18kspep1335.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
