@@ -15,16 +15,18 @@
     <string name="login_title">Log in with your email</string>
     <string name="login">Log in</string>
     <string name="register_text">Don\'t have an account?</string>
-    <string name="register"><u>Register</u></string>
+    <string name="register">Register</string>
+    <string name="sign_up">Sign up</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
+    <string name="hint_repeat_password">Repeat password</string>
     <string name="login_other_options">OR CONNECT WITH</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
-
-
-    <string name="facebook_application_id" translatable="false">1211035765905922</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">fb1211035765905922</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="hello_blank_fragment" />
+    <string name="register_title">Register account</string>
+    <string name="login_reference">Already registered?</string>
+    <string name="background">Background</string>
+    <string name="user_agreement">By creating an account, you agree to our \n Terms of Service and Privacy Policy</string>
 </resources>

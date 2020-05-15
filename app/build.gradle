@@ -48,7 +48,6 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-auth:19.3.1'
     implementation 'com.firebaseui:firebase-ui-auth:6.2.1'
-    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
     annotationProcessor "android.arch.lifecycle:compiler:@=$archLifecycleVersion"
 
     testImplementation 'junit:junit:4.13'

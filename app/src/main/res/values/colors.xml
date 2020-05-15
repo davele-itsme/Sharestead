@@ -10,4 +10,5 @@
     <color name="gray">#9695A8</color>
     <color name="google_red">#D9372B</color>
     <color name="fb_blue">#36609F</color>
+    <color name="backgroundFilter">#E9FFFFFF</color>
 </resources>
