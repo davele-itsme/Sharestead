@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +18,7 @@ import dk.via.sharestead.R;
 public class AuthenticationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailField, passwordField;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
+        button = findViewById(R.id.logInBtn);
     }
 
     public void onLoginBtnClicked(View view)

@@ -38,7 +38,7 @@ public class PlatformSliderAdapter extends RecyclerView.Adapter<PlatformSliderAd
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
         SliderItem item = sliderItems.get(position);
         if (item.isSelected()) {
-            holder.platformText.setTextColor(Color.parseColor("#0B9DDB"));
+            holder.platformText.setTextColor(Color.parseColor("#8B3487"));
         } else {
             item.setSelected(false);
             holder.platformText.setTextColor(Color.parseColor("#000000"));

@@ -48,9 +48,11 @@
         <Button
             android:id="@+id/continueButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:onClick="explore"
+            style="@style/Button"
             android:text="@string/preference_explore"
             android:textColor="@color/white"
             android:textSize="@dimen/preference_text_size_smaller" />
