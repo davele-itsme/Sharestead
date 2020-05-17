@@ -1,6 +1,7 @@
 package dk.via.sharestead.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import com.squareup.picasso.Picasso;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.adapter.RecyclerViewAdapter;
+import dk.via.sharestead.model.GameDetails;
 import dk.via.sharestead.viewmodel.HomeViewModel;
 
 /**
@@ -76,6 +78,8 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         gridRecyclerView.setLayoutManager(gridLayoutManager);
         horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
 
+        setPlatformGames();
+
         ImageView img = view.findViewById(R.id.game1Image);
         TextView textView = view.findViewById(R.id.game1Name);
 
@@ -89,15 +93,9 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
             recentGamesTitle.setVisibility(View.VISIBLE);
             upcomingGamesTitle.setVisibility(View.VISIBLE);
         });
-
         homeViewModel.getMoreGames().observe(getViewLifecycleOwner(), games -> {
             horizontalAdapter.setGames(games);
         });
-
-
-
-        setPlatformGames();
-
     }
 
     private void setPlatformGames() {
@@ -109,6 +107,6 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
 
     @Override
     public void onListItemClick(int clickedItemIndex) {
-
+        startActivity(new Intent(getContext(), GameDetails.class));
     }
 }

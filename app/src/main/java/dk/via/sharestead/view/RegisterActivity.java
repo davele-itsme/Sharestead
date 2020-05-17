@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         startActivity(new Intent(getApplicationContext(), AuthenticationActivity.class));
+                        Toast.makeText(this, "Account was successfully created", Toast.LENGTH_SHORT).show();
                     } else {
                         // If sign in fails, display a message to the user.
                         showAlertDialog(task.getException().getMessage());
