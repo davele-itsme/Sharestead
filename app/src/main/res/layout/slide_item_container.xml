@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="TextView"
+            android:text="TEXT HOLDER"
             android:textSize="@dimen/preference_text_size_smaller"
             tools:ignore="HardcodedText" />
     </FrameLayout>

@@ -1,12 +1,12 @@
 package dk.via.sharestead.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,15 +42,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull GameHolder holder, int position) {
         //VERY IMPORTANT TO HAVE HERE NULL, AS IT TAKES SOME TIME TO GET DATA AND INITIALIZING RECYCLER VIEW IS FASTER< THANKS TO WHICH IT WILL GET AN EXCEPTION OF NULL POINTER
         position++;
-        if(games != null)
-        {
+        if (games != null) {
             String image = games.get(position).getBackgroundImage();
             holder.textView.setText(games.get(position).getName());
-            if(type.equals("horizontal"))
-            {
+            if (type.equals("horizontal")) {
                 Picasso.with(context).load(image).resize(0, 400).into(holder.imageView);
-            }
-            else {
+            } else {
                 Picasso.with(context).load(image).resize(0, 800).into(holder.imageView);
             }
         }
@@ -58,8 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        if(games != null)
-        {
+        if (games != null) {
             return 13;
         }
         return 0;
@@ -73,23 +69,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class GameHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView textView;
         private ImageView imageView;
-        OnListItemClickListener onListItemClickListener;
+        private OnListItemClickListener listener;
 
         public GameHolder(@NonNull View itemView, OnListItemClickListener listener) {
             super(itemView);
             textView = itemView.findViewById(R.id.gameName);
             imageView = itemView.findViewById(R.id.gameImage);
-            onListItemClickListener = listener;
+            this.listener = listener;
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            onListItemClickListener.onListItemClick(getAdapterPosition());
+            int id = games.get(getAdapterPosition() + 1).getId();
+            listener.onListItemClick(id);
         }
     }
 
     public interface OnListItemClickListener {
-        void onListItemClick(int clickedItemIndex);
+        void onListItemClick(int gameId);
     }
 }

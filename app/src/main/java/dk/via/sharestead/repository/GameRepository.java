@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import dk.via.sharestead.model.Game;
+import dk.via.sharestead.model.GameDetails;
 import dk.via.sharestead.webservices.GamesAPI;
+import dk.via.sharestead.webservices.GamesDetailsResponse;
 import dk.via.sharestead.webservices.GamesResponse;
 import dk.via.sharestead.webservices.PlatformResponse;
 import dk.via.sharestead.webservices.ServiceGenerator;
@@ -19,29 +21,42 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeRepository {
+public class GameRepository {
     private MutableLiveData<List<Game>> games;
     private MutableLiveData<List<Game>> moreGames;
-    private static HomeRepository instance;
+    private MutableLiveData<GameDetails> gameDetails;
+    private static GameRepository instance;
     private Application application;
     private GamesAPI gamesAPI;
 
-    public HomeRepository(Application application) {
+    public GameRepository(Application application) {
         games = new MutableLiveData<>();
         moreGames = new MutableLiveData<>();
+        gameDetails = new MutableLiveData<>();
         this.application = application;
-         gamesAPI = ServiceGenerator.getGamesAPI();
+        gamesAPI = ServiceGenerator.getGamesAPI();
     }
 
-    public static HomeRepository getInstance(Application application) {
+    public static GameRepository getInstance(Application application) {
         if (instance == null) {
-            instance = new HomeRepository(application);
+            instance = new GameRepository(application);
         }
         return instance;
     }
 
-    public void requestVRGames() {
+    public LiveData<List<Game>> getGames() {
+        return games;
+    }
 
+    public LiveData<List<Game>> getMoreGames() {
+        return moreGames;
+    }
+
+    public LiveData<GameDetails> getGameDetails() {
+        return gameDetails;
+    }
+
+    public void requestVRGames() {
         Call<GamesResponse> call = gamesAPI.getVRGames();
         call.enqueue(new Callback<GamesResponse>() {
             @Override
@@ -75,6 +90,25 @@ public class HomeRepository {
 
             @Override
             public void onFailure(Call<PlatformResponse> call, Throwable t) {
+                Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void requestGameDetails(int id) {
+        Call<GamesDetailsResponse> call = gamesAPI.getGameDetails(id);
+        call.enqueue(new Callback<GamesDetailsResponse>() {
+            @Override
+            public void onResponse(Call<GamesDetailsResponse> call, Response<GamesDetailsResponse> response) {
+                if (response.code() == 200 && response.body() != null) {
+                        gameDetails.setValue(response.body().getGameDetails());
+                } else {
+                    Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GamesDetailsResponse> call, Throwable t) {
                 Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -126,14 +160,7 @@ public class HomeRepository {
         });
     }
 
-    public LiveData<List<Game>> getGames() {
-        return games;
-    }
 
-
-    public LiveData<List<Game>> getMoreGames() {
-        return moreGames;
-    }
 }
 
    

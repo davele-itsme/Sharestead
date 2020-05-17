@@ -10,19 +10,19 @@ public class GameDetails {
     private String description;
     private int metacritic;
 
+    private ArrayList<Developer> developers;
     private ArrayList<Platform> platforms;
     private ArrayList<Genre> genres;
 
     public GameDetails(int id, String name, String released, String backgroundImage, String description, int metacritic,
-                       ArrayList<Platform> platforms, ArrayList<Genre> genres)
-    {
+                       ArrayList<Developer> developers, ArrayList<Platform> platforms, ArrayList<Genre> genres) {
         this.id = id;
         this.name = name;
         this.released = released;
         this.backgroundImage = backgroundImage;
         this.description = description;
         this.metacritic = metacritic;
-
+        this.developers = developers;
         this.platforms = platforms;
         this.genres = genres;
     }
@@ -51,6 +51,10 @@ public class GameDetails {
         return metacritic;
     }
 
+    public ArrayList<Developer> getDevelopers() {
+        return developers;
+    }
+
     public ArrayList<Platform> getPlatforms() {
         return platforms;
     }
@@ -58,4 +62,6 @@ public class GameDetails {
     public ArrayList<Genre> getGenres() {
         return genres;
     }
+
+
 }

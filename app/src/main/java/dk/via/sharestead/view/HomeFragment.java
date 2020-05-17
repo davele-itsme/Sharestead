@@ -19,12 +19,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.adapter.RecyclerViewAdapter;
-import dk.via.sharestead.model.GameDetails;
 import dk.via.sharestead.viewmodel.HomeViewModel;
 
 /**
@@ -32,6 +32,7 @@ import dk.via.sharestead.viewmodel.HomeViewModel;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnListItemClickListener {
+    public static final String EXTRA_GAME = "Game ID";
     private RecyclerViewAdapter gridAdapter;
     private RecyclerViewAdapter horizontalAdapter;
     private HomeViewModel homeViewModel;
@@ -106,7 +107,9 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
 
 
     @Override
-    public void onListItemClick(int clickedItemIndex) {
-        startActivity(new Intent(getContext(), GameDetails.class));
+    public void onListItemClick(int gameId) {
+        Intent intent = new Intent(getContext(), GameDetailsActivity.class);
+        intent.putExtra(EXTRA_GAME, gameId);
+        startActivity(intent);
     }
 }

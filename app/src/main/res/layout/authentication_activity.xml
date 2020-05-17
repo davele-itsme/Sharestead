@@ -7,9 +7,9 @@
     <ProgressBar
         android:id="@+id/progressBarRecovery"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_height="wrap_content"/>
+        android:layout_centerVertical="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,13 +49,20 @@
             android:hint="@string/hint_email"
             android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/passwordField"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etPasswordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/hint_password"
-            android:inputType="textPassword" />
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/passwordField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/forgotPassword"
