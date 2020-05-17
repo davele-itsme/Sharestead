@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +37,9 @@ public class GameDetailsActivity extends AppCompatActivity {
         if (bundle != null && bundle.containsKey(HomeFragment.EXTRA_GAME)) {
             id = bundle.getInt(HomeFragment.EXTRA_GAME);
         }
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
 
         gameImage = findViewById(R.id.gameImage);
         gameName = findViewById(R.id.gameName);

@@ -30,7 +30,7 @@ public class GamesDetailsResponse {
 
     public GameDetails getGameDetails()
     {
-        Developer developer = new Developer(developers.get(0).id, developers.get(0).getName());
+        Developer developer = new Developer(developers.get(0).id, "Developer: " + developers.get(0).getName());
         ArrayList<Platform> platformArrayList = new ArrayList<>();
         ArrayList<Genre> genreArrayList = new ArrayList<>();
         for(PlatformValue platformValue:platforms)
@@ -41,7 +41,7 @@ public class GamesDetailsResponse {
         {
             genreArrayList.add(new Genre(genreValue.id, genreValue.name, genreValue.imageBackground));
         }
-        return new GameDetails(id, name, released, backgroundImage, backgroundImageAdditional, description, metacritic, developer, platformArrayList, genreArrayList);
+        return new GameDetails(id, name, "Published: " + released, backgroundImage, backgroundImageAdditional, description, metacritic, developer, platformArrayList, genreArrayList);
     }
 
     public int getId() {
