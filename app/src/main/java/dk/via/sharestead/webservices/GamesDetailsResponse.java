@@ -17,6 +17,9 @@ public class GamesDetailsResponse {
     private String released;
     @SerializedName("background_image")
     private String backgroundImage;
+    @SerializedName("background_image_additional")
+    private String backgroundImageAdditional;
+    @SerializedName("description_raw")
     private String description;
     private int metacritic;
     private ArrayList<DeveloperValue> developers = new ArrayList<>();
@@ -27,13 +30,9 @@ public class GamesDetailsResponse {
 
     public GameDetails getGameDetails()
     {
-        ArrayList<Developer> developerArrayList = new ArrayList<>();
+        Developer developer = new Developer(developers.get(0).id, developers.get(0).getName());
         ArrayList<Platform> platformArrayList = new ArrayList<>();
         ArrayList<Genre> genreArrayList = new ArrayList<>();
-        for(DeveloperValue developerValue:developers)
-        {
-            developerArrayList.add(new Developer(developerValue.id, developerValue.name, developerValue.imageBackground));
-        }
         for(PlatformValue platformValue:platforms)
         {
             platformArrayList.add(new Platform(platformValue.id, platformValue.name));
@@ -42,7 +41,7 @@ public class GamesDetailsResponse {
         {
             genreArrayList.add(new Genre(genreValue.id, genreValue.name, genreValue.imageBackground));
         }
-        return new GameDetails(id, name, released, backgroundImage, description, metacritic, developerArrayList, platformArrayList, genreArrayList);
+        return new GameDetails(id, name, released, backgroundImage, backgroundImageAdditional, description, metacritic, developer, platformArrayList, genreArrayList);
     }
 
     public int getId() {
@@ -84,8 +83,6 @@ public class GamesDetailsResponse {
     private class DeveloperValue{
         private int id;
         private String name;
-        @SerializedName("image_background")
-        private String imageBackground;
 
         public int getId() {
             return id;

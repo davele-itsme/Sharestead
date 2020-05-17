@@ -11,4 +11,5 @@
     <color name="google_red">#D9372B</color>
     <color name="fb_blue">#36609F</color>
     <color name="status_bar">#F5F5F5</color>
+    <color name="background_filter">#55000000</color>
 </resources>

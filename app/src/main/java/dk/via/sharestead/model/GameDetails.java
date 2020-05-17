@@ -7,22 +7,24 @@ public class GameDetails {
     private String name;
     private String released;
     private String backgroundImage;
+    private String backgroundImageAdditional;
     private String description;
     private int metacritic;
 
-    private ArrayList<Developer> developers;
+    private Developer developer;
     private ArrayList<Platform> platforms;
     private ArrayList<Genre> genres;
 
-    public GameDetails(int id, String name, String released, String backgroundImage, String description, int metacritic,
-                       ArrayList<Developer> developers, ArrayList<Platform> platforms, ArrayList<Genre> genres) {
+    public GameDetails(int id, String name, String released, String backgroundImage, String backgroundImageAdditional, String description, int metacritic,
+                       Developer developer, ArrayList<Platform> platforms, ArrayList<Genre> genres) {
         this.id = id;
         this.name = name;
         this.released = released;
         this.backgroundImage = backgroundImage;
+        this.backgroundImageAdditional = backgroundImageAdditional;
         this.description = description;
         this.metacritic = metacritic;
-        this.developers = developers;
+        this.developer = developer;
         this.platforms = platforms;
         this.genres = genres;
     }
@@ -43,6 +45,10 @@ public class GameDetails {
         return backgroundImage;
     }
 
+    public String getBackgroundImageAdditional() {
+        return backgroundImageAdditional;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -51,8 +57,8 @@ public class GameDetails {
         return metacritic;
     }
 
-    public ArrayList<Developer> getDevelopers() {
-        return developers;
+    public Developer getDeveloper() {
+        return developer;
     }
 
     public ArrayList<Platform> getPlatforms() {

@@ -5,11 +5,10 @@ public class Developer {
     private String name;
     private String imageBackground;
 
-    public Developer(int id, String name, String imageBackground)
+    public Developer(int id, String name)
     {
         this.id = id;
         this.name = name;
-        this.imageBackground = imageBackground;
     }
 
     public int getId() {
@@ -18,9 +17,5 @@ public class Developer {
 
     public String getName() {
         return name;
-    }
-
-    public String getImageBackground() {
-        return imageBackground;
     }
 }
