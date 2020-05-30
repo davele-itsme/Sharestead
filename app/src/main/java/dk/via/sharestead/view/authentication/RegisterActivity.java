@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import dk.via.sharestead.R;
@@ -40,17 +41,21 @@ public class RegisterActivity extends AppCompatActivity {
         String password = passwordField.getText().toString().trim();
         String repeatPassword = repeatPasswordField.getText().toString().trim();
         progressDialog.show(getSupportFragmentManager(), TAG);
+        TextInputLayout passwordLayout = findViewById(R.id.passwordLayout);
+        TextInputLayout repeatPasswordLayout = findViewById(R.id.passwordLayoutRepeat);
+        repeatPasswordLayout.setError(null);
+        passwordLayout.setError(null);
 
         if (TextUtils.isEmpty(email)) {
-            showAlertDialog("Email can not be empty.");
+            emailField.setError((getResources().getString(R.string.empty_email)));
             progressDialog.dismiss();
             return;
         } else if (TextUtils.isEmpty(password)) {
-            showAlertDialog("Password can not be empty.");
+            passwordLayout.setError((getResources().getString(R.string.empty_password)));
             progressDialog.dismiss();
             return;
         } else if (!password.equals(repeatPassword)) {
-            showAlertDialog("Passwords do not match.");
+            repeatPasswordLayout.setError((getResources().getString(R.string.password_not_match)));
             progressDialog.dismiss();
             return;
         }
@@ -61,16 +66,17 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         startActivity(new Intent(getApplicationContext(), AuthenticationActivity.class));
-                        Toast.makeText(this, "Account was successfully created", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getResources().getString(R.string.register_account_successful), Toast.LENGTH_SHORT).show();
                     } else {
                         // If sign in fails, display a message to the user.
-                        showAlertDialog(task.getException().getMessage());
+                        if (task.getException() != null) {
+                            showAlertDialog(task.getException().getMessage());
+                        }
                     }
                 });
     }
 
-    public void onLoginClicked(View view)
-    {
+    public void onLoginClicked(View view) {
         startActivity(new Intent(this, AuthenticationActivity.class));
     }
 
