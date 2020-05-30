@@ -1,8 +1,5 @@
 package dk.via.sharestead.webservices;
 
-import java.util.List;
-
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -15,9 +12,9 @@ public class ServiceGenerator {
 
     private static Retrofit retrofit = retrofitBuilder.build();
 
-    private static GamesAPI gamesAPI = retrofit.create(GamesAPI.class);
+    private static GamesApi gamesAPI = retrofit.create(GamesApi.class);
 
-    public static GamesAPI getGamesAPI() {
+    public static GamesApi getGamesAPI() {
         return gamesAPI;
     }
 }

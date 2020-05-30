@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.GameDetailsActivity"></activity>
-        <activity android:name=".view.RegisterActivity" />
-        <activity android:name=".view.AuthenticationActivity">
+        <activity android:name=".view.authentication.RegisterActivity" />
+        <activity android:name=".view.authentication.AuthenticationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

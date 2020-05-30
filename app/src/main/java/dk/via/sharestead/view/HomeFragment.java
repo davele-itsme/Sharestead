@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -19,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     private RecyclerViewAdapter horizontalAdapter;
     private HomeViewModel homeViewModel;
     private ProgressBar progressBar;
-    private StaggeredGridLayoutManager gridLayoutManager;
+    private GridLayoutManager gridLayoutManager;
     private LinearLayoutManager horizontalLayoutManager;
 
     public HomeFragment() {
@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
         // Inflate the layout for this fragment

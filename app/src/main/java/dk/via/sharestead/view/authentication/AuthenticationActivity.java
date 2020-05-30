@@ -1,4 +1,4 @@
-package dk.via.sharestead.view;
+package dk.via.sharestead.view.authentication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,18 +10,20 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 
 import dk.via.sharestead.R;
+import dk.via.sharestead.view.PreferenceActivity;
+import dk.via.sharestead.view.dialog.ProgressDialog;
 
 public class AuthenticationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailField, passwordField;
-    private ProgressBar progressBar;
+    private final String TAG = "ProgressBar";
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +33,12 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
-        progressBar = findViewById(R.id.progressBarRecovery);
-        progressBar.setVisibility(View.GONE);
+        progressDialog = new ProgressDialog();
+
     }
 
     public void onLoginBtnClicked(View view) {
-        progressBar.setVisibility(View.VISIBLE);
+        progressDialog.show(getSupportFragmentManager(), TAG);
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
         if (TextUtils.isEmpty(email)) {
@@ -50,7 +52,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
-                    progressBar.setVisibility(View.GONE);
+                    progressDialog.dismiss();
                     if (task.isSuccessful()) {
                         // Sign in successful
                         startActivity(new Intent(getApplicationContext(), PreferenceActivity.class));
@@ -80,12 +82,10 @@ public class AuthenticationActivity extends AppCompatActivity {
                 .setTitle("Recover password")
                 .setView(linearLayout)
                 .setPositiveButton("Recover", (dialog, which) -> {
-                    if(!emailField.getText().toString().isEmpty())
-                    {
+                    if (!emailField.getText().toString().isEmpty()) {
                         String email = emailField.getText().toString().trim();
                         sendRecovery(email);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -106,16 +106,16 @@ public class AuthenticationActivity extends AppCompatActivity {
     }
 
     private void sendRecovery(String email) {
-        progressBar.setVisibility(View.VISIBLE);
+        progressDialog.show(getSupportFragmentManager(), TAG);
         mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
-            progressBar.setVisibility(View.GONE);
+            progressDialog.dismiss();
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Recovery email was sent", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "An error occurred. Please, try again later.", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(e -> {
-            progressBar.setVisibility(View.GONE);
+            progressDialog.dismiss();
             Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_LONG).show();
         });
     }

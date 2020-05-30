@@ -56,7 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount() {
         if (games != null) {
-            return 13;
+            return 14;
         }
         return 0;
     }

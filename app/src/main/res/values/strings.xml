@@ -33,4 +33,6 @@
     <string name="user_agreement">By creating an account, you agree to our \n Terms of Service and Privacy Policy</string>
     <string name="join_us">JOIN US!</string>
     <string name="game_image_view">Image of game</string>
+    <string name="share_search_text">Search for a game</string>
+    <string name="progress_bar_loading">Loading</string>
 </resources>

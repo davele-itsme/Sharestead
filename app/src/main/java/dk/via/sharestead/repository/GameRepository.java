@@ -12,7 +12,7 @@ import java.util.Map;
 
 import dk.via.sharestead.model.Game;
 import dk.via.sharestead.model.GameDetails;
-import dk.via.sharestead.webservices.GamesAPI;
+import dk.via.sharestead.webservices.GamesApi;
 import dk.via.sharestead.webservices.GamesDetailsResponse;
 import dk.via.sharestead.webservices.GamesResponse;
 import dk.via.sharestead.webservices.PlatformResponse;
@@ -27,7 +27,7 @@ public class GameRepository {
     private MutableLiveData<GameDetails> gameDetails;
     private static GameRepository instance;
     private Application application;
-    private GamesAPI gamesAPI;
+    private GamesApi gamesAPI;
 
     public GameRepository(Application application) {
         games = new MutableLiveData<>();
