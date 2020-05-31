@@ -30,8 +30,8 @@ public class AuthenticationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.authentication_activity);
-        mAuth = FirebaseAuth.getInstance();
 
+        mAuth = FirebaseAuth.getInstance();
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
         progressDialog = new ProgressDialog();
@@ -39,13 +39,16 @@ public class AuthenticationActivity extends AppCompatActivity {
     }
 
     public void onLoginBtnClicked(View view) {
+        //Show progress bar
         progressDialog.show(getSupportFragmentManager(), TAG);
+        //Getting strings from fields
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
         //To clear error if user clicks on button again
         TextInputLayout passwordLayout = findViewById(R.id.passwordLayout);
         passwordLayout.setError(null);
 
+        //If statements for empty field cases
         if (TextUtils.isEmpty(email)) {
             emailField.setError(getResources().getString(R.string.empty_email));
             progressDialog.dismiss();
@@ -56,6 +59,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             return;
         }
 
+        //Sign in using FirebaseAuth instance
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     progressDialog.dismiss();
@@ -75,7 +79,9 @@ public class AuthenticationActivity extends AppCompatActivity {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
+    //Method for recovering using email
     public void onForgetPasswordClicked(View view) {
+        //Setting view
         LinearLayout linearLayout = new LinearLayout(this);
         EditText emailField = new EditText(this);
         emailField.setHint(getResources().getString(R.string.hint_email));
@@ -84,6 +90,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         linearLayout.addView(emailField);
         linearLayout.setPadding(50, 10, 50, 10);
 
+        //Creating Dialog with above mentioned view
         new AlertDialog.Builder(this)
                 .setTitle(getResources().getString(R.string.recover_dialog_title))
                 .setView(linearLayout)
