@@ -40,15 +40,18 @@ public class GameDetailsActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        setLayout();
+        viewModel = new ViewModelProvider(this).get(GameDetailsViewModel.class);
+        setGameDetails(id);
+    }
 
+    private void setLayout() {
         gameImage = findViewById(R.id.gameImage);
         gameName = findViewById(R.id.gameName);
         developerName = findViewById(R.id.developerName);
         metacritic = findViewById(R.id.metacritic);
         released = findViewById(R.id.released);
         description = findViewById(R.id.description);
-        viewModel = new ViewModelProvider(this).get(GameDetailsViewModel.class);
-        setGameDetails(id);
     }
 
     private void setGameDetails(int id) {
