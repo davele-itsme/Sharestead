@@ -8,12 +8,49 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1044304214404:android:4553df6068c003976705d1",
+        "android_client_info": {
+          "package_name": "dk.via.booknote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044304214404-ereo994vn2sbqovoe9ivg18kspep1335.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEXlOQN85UqGVAOQvaMMc3EpkNJWNeaL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044304214404-ereo994vn2sbqovoe9ivg18kspep1335.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1044304214404:android:5f9c5884db3bdd1d6705d1",
         "android_client_info": {
           "package_name": "dk.via.sharestead"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1044304214404-1cbpmjl71q7rpsvcg7kltmeo1vi8b3eq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dk.via.sharestead",
+            "certificate_hash": "1ec54ac2ba42d1aa33e3d105fda2c17bd5c68b30"
+          }
+        },
         {
           "client_id": "1044304214404-ereo994vn2sbqovoe9ivg18kspep1335.apps.googleusercontent.com",
           "client_type": 3

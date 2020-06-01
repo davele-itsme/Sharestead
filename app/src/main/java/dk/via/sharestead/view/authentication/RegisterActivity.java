@@ -19,7 +19,7 @@ import dk.via.sharestead.viewmodel.RegisterViewModel;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText emailField, passwordField, repeatPasswordField;
-    private final String TAG = "ProgressBar";
+    private final String TAG = "Progress dialog";
     private ProgressDialog progressDialog;
     private RegisterViewModel registerViewModel;
 

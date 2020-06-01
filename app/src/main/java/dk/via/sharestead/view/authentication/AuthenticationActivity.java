@@ -23,7 +23,7 @@ import dk.via.sharestead.viewmodel.AuthenticationViewModel;
 
 public class AuthenticationActivity extends AppCompatActivity {
     private EditText emailField, passwordField;
-    private final String TAG = "ProgressBar";
+    private final String TAG = "Progress dialog";
     private ProgressDialog progressDialog;
     private TextInputLayout passwordLayout;
     private AuthenticationViewModel authenticationViewModel;
