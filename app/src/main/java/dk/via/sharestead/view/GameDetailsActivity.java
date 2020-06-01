@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import dk.via.sharestead.R;
-import dk.via.sharestead.model.GameDetails;
 import dk.via.sharestead.viewmodel.GameDetailsViewModel;
 import me.biubiubiu.justifytext.library.JustifyTextView;
 

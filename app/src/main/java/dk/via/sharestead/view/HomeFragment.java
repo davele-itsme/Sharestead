@@ -21,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import dk.via.sharestead.R;
@@ -68,17 +72,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
 
         progressBar = view.findViewById(R.id.progressBar);
 
-        RecyclerView gridRecyclerView = view.findViewById(R.id.gridRecyclerView);
-        RecyclerView horizontalRecyclerView = view.findViewById(R.id.horizontalRecyclerView);
-
-        gridAdapter = new RecyclerViewAdapter("grid", getContext(), this);
-        horizontalAdapter = new RecyclerViewAdapter("horizontal", getContext(), this);
-
-        gridRecyclerView.setAdapter(gridAdapter);
-        horizontalRecyclerView.setAdapter(horizontalAdapter);
-        gridRecyclerView.setLayoutManager(gridLayoutManager);
-        horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
-
+        setRecyclerView(view);
         setPlatformGames();
 
         ImageView img = view.findViewById(R.id.game1Image);
@@ -97,6 +91,19 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         homeViewModel.getMoreGames().observe(getViewLifecycleOwner(), games -> {
             horizontalAdapter.setGames(games);
         });
+    }
+
+    private void setRecyclerView(View view) {
+        RecyclerView gridRecyclerView = view.findViewById(R.id.gridRecyclerView);
+        RecyclerView horizontalRecyclerView = view.findViewById(R.id.horizontalRecyclerView);
+
+        gridAdapter = new RecyclerViewAdapter("grid", getContext(), this);
+        horizontalAdapter = new RecyclerViewAdapter("horizontal", getContext(), this);
+
+        gridRecyclerView.setAdapter(gridAdapter);
+        horizontalRecyclerView.setAdapter(horizontalAdapter);
+        gridRecyclerView.setLayoutManager(gridLayoutManager);
+        horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
     }
 
     private void setPlatformGames() {

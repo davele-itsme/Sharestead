@@ -5,33 +5,56 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import dk.via.sharestead.R;
+import dk.via.sharestead.view.authentication.AuthenticationActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private FragmentTransaction ft = null;
     private Fragment currentFragment;
+    private FirebaseAuth mAuth;
+    private boolean doubleBackToExitPressedOnce;
+    private Handler mHandler = new Handler();
+    private BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        currentFragment = new HomeFragment();
-        switchToFragment();
-
-        BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
+        navigation = findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.bottom_navigation);
 
+        if (savedInstanceState != null) {
+            int navigationId = savedInstanceState.getInt("navigationId");
+            navigation.setSelectedItemId(navigationId);
+        } else {
+            currentFragment = new HomeFragment();
+            switchToFragment();
+        }
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            //stay here
+        } else {
+            startActivity(new Intent(this, AuthenticationActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -45,37 +68,71 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.actionHome:
-                        currentFragment = new HomeFragment();
-                        switchToFragment();
-                        return true;
-                    case R.id.actionShare:
-                        currentFragment = new ShareFragment();
-                        switchToFragment();
-                        return true;
-                    case R.id.actionWishes:
-                        currentFragment = new WishFragment();
-                        switchToFragment();
-                        return true;
-                    case R.id.actionMessages:
-                        currentFragment = new MessageFragment();
-                        switchToFragment();
-                        return true;
-                    case R.id.actionProfile:
-                        currentFragment = new ProfileFragment();
-                        switchToFragment();
-                        return true;
-                }
-                return false;
+            switch (item.getItemId()) {
+                case R.id.actionHome:
+                    currentFragment = new HomeFragment();
+                    switchToFragment();
+                    return true;
+                case R.id.actionShare:
+                    currentFragment = new ShareFragment();
+                    switchToFragment();
+                    return true;
+                case R.id.actionWishes:
+                    currentFragment = new WishFragment();
+                    switchToFragment();
+                    return true;
+                case R.id.actionMessages:
+                    currentFragment = new MessageFragment();
+                    switchToFragment();
+                    return true;
+                case R.id.actionProfile:
+                    currentFragment = new ProfileFragment();
+                    switchToFragment();
+                    return true;
             }
+            return false;
+        }
     };
 
-    private void switchToFragment(){
+    private void switchToFragment() {
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, currentFragment);
         ft.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getResources().getString(R.string.press_back), Toast.LENGTH_SHORT).show();
+
+        mHandler.postDelayed(mRunnable, 2000);
+    }
+
+    private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mRunnable);
+        }
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("navigationId", navigation.getSelectedItemId());
+    }
 }

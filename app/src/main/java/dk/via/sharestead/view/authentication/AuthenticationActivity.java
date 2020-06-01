@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.view.PreferenceActivity;
@@ -23,7 +22,6 @@ import dk.via.sharestead.view.dialog.ProgressDialog;
 import dk.via.sharestead.viewmodel.AuthenticationViewModel;
 
 public class AuthenticationActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
     private EditText emailField, passwordField;
     private final String TAG = "ProgressBar";
     private ProgressDialog progressDialog;
@@ -36,7 +34,6 @@ public class AuthenticationActivity extends AppCompatActivity {
         setContentView(R.layout.authentication_activity);
 
         authenticationViewModel = new ViewModelProvider(this).get(AuthenticationViewModel.class);
-        mAuth = FirebaseAuth.getInstance();
         setLayout();
         progressDialog = new ProgressDialog();
     }
@@ -68,6 +65,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                 {
                     //Sign in successful
                     startActivity(new Intent(getApplicationContext(), PreferenceActivity.class));
+                    finish();
                 }
                 else if (!success.equals("")){
                     //Sign in not successful

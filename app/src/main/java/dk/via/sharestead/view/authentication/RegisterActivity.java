@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.view.dialog.ProgressDialog;
@@ -20,7 +19,6 @@ import dk.via.sharestead.viewmodel.RegisterViewModel;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText emailField, passwordField, repeatPasswordField;
-    private FirebaseAuth mAuth;
     private final String TAG = "ProgressBar";
     private ProgressDialog progressDialog;
     private RegisterViewModel registerViewModel;
@@ -32,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         setEditTexts();
-        mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog();
     }
 
