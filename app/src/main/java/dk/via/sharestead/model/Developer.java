@@ -1,9 +1,10 @@
 package dk.via.sharestead.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Developer {
     private int id;
     private String name;
-    private String imageBackground;
 
     public Developer(int id, String name)
     {

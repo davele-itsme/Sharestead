@@ -13,7 +13,6 @@ import java.util.Map;
 import dk.via.sharestead.model.Game;
 import dk.via.sharestead.model.GameDetails;
 import dk.via.sharestead.webservices.GamesApi;
-import dk.via.sharestead.webservices.GamesDetailsResponse;
 import dk.via.sharestead.webservices.GamesResponse;
 import dk.via.sharestead.webservices.PlatformResponse;
 import dk.via.sharestead.webservices.ServiceGenerator;
@@ -62,7 +61,7 @@ public class GameRepository {
             @Override
             public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-                    games.setValue(response.body().getGames());
+                    games.setValue(response.body().getResults());
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -96,19 +95,19 @@ public class GameRepository {
     }
 
     public void requestGameDetails(int id) {
-        Call<GamesDetailsResponse> call = gamesAPI.getGameDetails(id);
-        call.enqueue(new Callback<GamesDetailsResponse>() {
+        Call<GameDetails> call = gamesAPI.getGameDetails(id);
+        call.enqueue(new Callback<GameDetails>() {
             @Override
-            public void onResponse(Call<GamesDetailsResponse> call, Response<GamesDetailsResponse> response) {
+            public void onResponse(Call<GameDetails> call, Response<GameDetails> response) {
                 if (response.code() == 200 && response.body() != null) {
-                        gameDetails.setValue(response.body().getGameDetails());
+                        gameDetails.setValue(response.body());
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<GamesDetailsResponse> call, Throwable t) {
+            public void onFailure(Call<GameDetails> call, Throwable t) {
                 Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -124,7 +123,7 @@ public class GameRepository {
             @Override
             public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-                    games.setValue(response.body().getGames());
+                    games.setValue(response.body().getResults());
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -147,7 +146,7 @@ public class GameRepository {
             @Override
             public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-                    moreGames.setValue(response.body().getGames());
+                    moreGames.setValue(response.body().getResults());
                 } else {
                     Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }

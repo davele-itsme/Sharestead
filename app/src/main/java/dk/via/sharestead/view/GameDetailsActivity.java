@@ -1,15 +1,10 @@
 package dk.via.sharestead.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,7 +53,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         viewModel.getGameDetails().observe(this, gameDetails -> {
             Picasso.with(getBaseContext()).load(gameDetails.getBackgroundImage()).resize(0, 1000).into(gameImage);
             gameName.setText(gameDetails.getName());
-            developerName.setText(gameDetails.getDeveloper().getName());
+            developerName.setText(gameDetails.getDevelopers().get(0).getName());
             metacritic.setText(String.valueOf(gameDetails.getMetacritic()));
             released.setText(gameDetails.getReleased());
             description.setText(gameDetails.getDescription());

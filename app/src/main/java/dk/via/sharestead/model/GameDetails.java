@@ -1,22 +1,28 @@
 package dk.via.sharestead.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class GameDetails {
     private int id;
     private String name;
     private String released;
+    @SerializedName("background_image")
     private String backgroundImage;
+    @SerializedName("background_image_additional")
     private String backgroundImageAdditional;
+    @SerializedName("description_raw")
     private String description;
     private int metacritic;
 
-    private Developer developer;
+    private ArrayList<Developer> developers;
+    @SerializedName("parent_platforms")
     private ArrayList<Platform> platforms;
     private ArrayList<Genre> genres;
 
     public GameDetails(int id, String name, String released, String backgroundImage, String backgroundImageAdditional, String description, int metacritic,
-                       Developer developer, ArrayList<Platform> platforms, ArrayList<Genre> genres) {
+                       ArrayList<Developer> developers, ArrayList<Platform> platforms, ArrayList<Genre> genres) {
         this.id = id;
         this.name = name;
         this.released = released;
@@ -24,7 +30,7 @@ public class GameDetails {
         this.backgroundImageAdditional = backgroundImageAdditional;
         this.description = description;
         this.metacritic = metacritic;
-        this.developer = developer;
+        this.developers = developers;
         this.platforms = platforms;
         this.genres = genres;
     }
@@ -57,8 +63,8 @@ public class GameDetails {
         return metacritic;
     }
 
-    public Developer getDeveloper() {
-        return developer;
+    public ArrayList<Developer> getDevelopers() {
+        return developers;
     }
 
     public ArrayList<Platform> getPlatforms() {

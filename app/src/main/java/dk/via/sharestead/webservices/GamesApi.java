@@ -2,6 +2,7 @@ package dk.via.sharestead.webservices;
 
 import java.util.Map;
 
+import dk.via.sharestead.model.GameDetails;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -19,5 +20,5 @@ public interface GamesApi {
     Call<PlatformResponse> getPlatformId();
 
     @GET("games/{id}")
-    Call<GamesDetailsResponse> getGameDetails(@Path("id") int id);
+    Call<GameDetails> getGameDetails(@Path("id") int id);
 }
