@@ -10,7 +10,7 @@
     <string name="wishes">Wishes</string>
     <string name="messages">Messages</string>
     <string name="profile">Profile</string>
-    <string name="home_text">Explore recommended games</string>
+    <string name="home_text1">Explore</string>
     <string name="description_recommended_main_game">Recommended popular game</string>
     <string name="best_games">Cool recent games</string>
     <string name="best_more_games">Something for you!</string>
@@ -50,4 +50,6 @@
     <string name="profile_name">Profile name</string>
     <string name="profile_email">Profile email</string>
     <string name="change_name">Tap to change name</string>
+    <string name="home_text2">recommended</string>
+    <string name="home_text3">games</string>
 </resources>

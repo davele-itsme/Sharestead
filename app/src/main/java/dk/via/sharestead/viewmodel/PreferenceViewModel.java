@@ -21,10 +21,10 @@ public class PreferenceViewModel extends AndroidViewModel {
     }
 
     private void setImages() {
-        sliderItems.add(new SliderItem("COMPUTER", R.drawable.computer));
-        sliderItems.add(new SliderItem("CONSOLE", R.drawable.console));
-        sliderItems.add(new SliderItem("MOBILE", R.drawable.mobile));
-        sliderItems.add(new SliderItem("VIRTUAL REALITY", R.drawable.virtual_reality));
+        sliderItems.add(new SliderItem("COMPUTER", R.drawable.img_computer));
+        sliderItems.add(new SliderItem("CONSOLE", R.drawable.img_console));
+        sliderItems.add(new SliderItem("MOBILE", R.drawable.img_mobile));
+        sliderItems.add(new SliderItem("VIRTUAL REALITY", R.drawable.img_vr));
     }
 
     public List<SliderItem> getSliderItems() {

@@ -15,7 +15,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/logo" />
+                app:srcCompat="@drawable/ic_logo" />
 
             <TextView
                 android:layout_width="wrap_content"

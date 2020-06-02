@@ -63,13 +63,6 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView mainTitle = view.findViewById(R.id.exploreTitle);
-        TextView recentGamesTitle = view.findViewById(R.id.bestGamesTitle);
-        TextView upcomingGamesTitle = view.findViewById(R.id.bestUpcomingTitle);
-        mainTitle.setVisibility(View.INVISIBLE);
-        recentGamesTitle.setVisibility(View.INVISIBLE);
-        upcomingGamesTitle.setVisibility(View.INVISIBLE);
-
         progressBar = view.findViewById(R.id.progressBar);
 
         setRecyclerView(view);
@@ -84,9 +77,6 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
             progressBar.setVisibility(View.INVISIBLE);
             Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0, 1000).into(img);
             textView.setText(games.get(0).getName());
-            mainTitle.setVisibility(View.VISIBLE);
-            recentGamesTitle.setVisibility(View.VISIBLE);
-            upcomingGamesTitle.setVisibility(View.VISIBLE);
         });
         homeViewModel.getMoreGames().observe(getViewLifecycleOwner(), games -> {
             horizontalAdapter.setGames(games);
