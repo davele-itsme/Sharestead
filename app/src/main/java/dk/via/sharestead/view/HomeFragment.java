@@ -12,19 +12,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import dk.via.sharestead.R;
@@ -65,22 +61,37 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         super.onViewCreated(view, savedInstanceState);
         progressBar = view.findViewById(R.id.progressBar);
 
+        LinearLayout homeLayout = view.findViewById(R.id.homeFragmentLayout);
+        homeLayout.setVisibility(View.GONE);
+
         setRecyclerView(view);
         setPlatformGames();
 
-        ImageView img = view.findViewById(R.id.game1Image);
-        TextView textView = view.findViewById(R.id.game1Name);
+        ImageView firstGameImage = view.findViewById(R.id.game1Image);
+        TextView firstGameName = view.findViewById(R.id.game1Name);
 
         //Triggered when data in LiveData is changed
         homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
             gridAdapter.setGames(games);
             progressBar.setVisibility(View.INVISIBLE);
-            Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0, 1000).into(img);
-            textView.setText(games.get(0).getName());
+            Picasso.with(getContext()).load(games.get(0).getBackgroundImage()).resize(0, 1000).into(firstGameImage);
+            firstGameName.setText(games.get(0).getName());
+            homeLayout.setVisibility(View.VISIBLE);
         });
         homeViewModel.getMoreGames().observe(getViewLifecycleOwner(), games -> {
             horizontalAdapter.setGames(games);
         });
+
+        firstGameImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), GameDetailsActivity.class);
+                int id = homeViewModel.getFirstGameId();
+                intent.putExtra(EXTRA_GAME, id);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void setRecyclerView(View view) {

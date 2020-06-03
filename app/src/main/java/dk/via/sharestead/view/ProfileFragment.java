@@ -106,7 +106,7 @@ public class ProfileFragment extends Fragment {
                     nameText.setText(strings[0]);
                 }
                 if (!strings[1].equals("")) {
-                    Picasso.with(getContext()).load(strings[1]).into(imageView);
+                    Picasso.with(getContext()).load(strings[1]).resize(400, 400).centerCrop().into(imageView);
                 }
                 if (!strings[2].equals("")) {
                     emailText.setText(strings[2]);

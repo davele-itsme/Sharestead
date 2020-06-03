@@ -11,6 +11,15 @@
         android:orientation="vertical"
         tools:context=".view.GameDetailsActivity">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:elevation="5dp"
+            android:layout_marginTop="10dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:layout_height="?attr/actionBarSize" />
+
         <ImageView
             android:id="@+id/gameImage"
             android:layout_width="match_parent"

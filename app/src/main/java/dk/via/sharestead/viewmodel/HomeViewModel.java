@@ -54,4 +54,8 @@ public class HomeViewModel extends AndroidViewModel {
     public LiveData<List<Game>> getMoreGames() {
         return moreGames;
     }
+
+    public int getFirstGameId() {
+        return games.getValue().get(0).getId();
+    }
 }
