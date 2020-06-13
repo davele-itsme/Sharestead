@@ -6,9 +6,7 @@
     <string name="preference_tap">Tap to select platform/s.</string>
     <string name="preference_explore">Explore</string>
     <string name="home">Home</string>
-    <string name="share">Share</string>
-    <string name="wishes">Wishes</string>
-    <string name="messages">Messages</string>
+    <string name="notes">Notes</string>
     <string name="profile">Profile</string>
     <string name="description_recommended_main_game">Recommended popular game</string>
     <string name="best_games">Cool recent games</string>

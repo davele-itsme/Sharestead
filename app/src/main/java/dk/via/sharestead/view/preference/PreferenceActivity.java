@@ -1,4 +1,4 @@
-package dk.via.sharestead.view;
+package dk.via.sharestead.view.preference;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;

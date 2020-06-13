@@ -9,14 +9,14 @@ import androidx.fragment.app.Fragment;
 
 import dk.via.sharestead.R;
 
-public class WishFragment extends Fragment {
+public class NoteFragment extends Fragment {
 
-    public WishFragment() {
+    public NoteFragment() {
 
     }
 
-    public static WishFragment newInstance(String param1, String param2) {
-        WishFragment fragment = new WishFragment();
+    public static NoteFragment newInstance(String param1, String param2) {
+        NoteFragment fragment = new NoteFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

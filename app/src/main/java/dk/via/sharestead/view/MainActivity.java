@@ -3,22 +3,19 @@ package dk.via.sharestead.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -36,22 +33,19 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navigation;
     private ConnectivityReceiver receiver;
 
+    private final Fragment fragment1 = new HomeFragment();
+    private final Fragment fragment2 = new NoteFragment();
+    private final Fragment fragment3 = new ProfileFragment();
+    private final FragmentManager fm = getSupportFragmentManager();
+    private Fragment active = fragment1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        navigation = findViewById(R.id.bottom_navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.bottom_navigation);
-
-        if (savedInstanceState != null) {
-            int navigationId = savedInstanceState.getInt("navigationId");
-            navigation.setSelectedItemId(navigationId);
-        } else {
-            currentFragment = new HomeFragment();
-            switchToFragment();
-        }
+        setNavigation();
+        setFragments();
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -67,43 +61,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.actionHome:
-                    currentFragment = new HomeFragment();
-                    switchToFragment();
-                    return true;
-                case R.id.actionShare:
-                    currentFragment = new ShareFragment();
-                    switchToFragment();
-                    return true;
-                case R.id.actionWishes:
-                    currentFragment = new WishFragment();
-                    switchToFragment();
-                    return true;
-                case R.id.actionMessages:
-                    currentFragment = new MessageFragment();
-                    switchToFragment();
-                    return true;
-                case R.id.actionProfile:
-                    currentFragment = new ProfileFragment();
-                    switchToFragment();
-                    return true;
-            }
-            return false;
-        }
-    };
-
-    private void switchToFragment() {
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, currentFragment);
-        ft.commit();
-    }
-
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -117,13 +74,6 @@ public class MainActivity extends AppCompatActivity {
         mHandler.postDelayed(mRunnable, 2000);
     }
 
-    private final Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            doubleBackToExitPressedOnce = false;
-        }
-    };
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -131,13 +81,6 @@ public class MainActivity extends AppCompatActivity {
         if (mHandler != null) {
             mHandler.removeCallbacks(mRunnable);
         }
-    }
-
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("navigationId", navigation.getSelectedItemId());
     }
 
     @Override
@@ -158,4 +101,51 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.actionHome:
+                    fm.beginTransaction().hide(active).show(fragment1).commit();
+                    active = fragment1;
+                    return true;
+                case R.id.actionNotes:
+                    fm.beginTransaction().hide(active).show(fragment2).commit();
+                    active = fragment2;
+                    return true;
+                case R.id.actionProfile:
+                    fm.beginTransaction().hide(active).show(fragment3).commit();
+                    active = fragment3;
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    private void switchToFragment() {
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, currentFragment);
+        ft.commit();
+    }
+
+    private void setNavigation() {
+        navigation = findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.bottom_navigation);
+    }
+
+    private void setFragments() {
+        fm.beginTransaction().add(R.id.content, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.content, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.content,fragment1, "1").commit();
+    }
+
+    private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
 }

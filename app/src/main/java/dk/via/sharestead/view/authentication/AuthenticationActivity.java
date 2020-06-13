@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 
 import dk.via.sharestead.R;
-import dk.via.sharestead.view.PreferenceActivity;
+import dk.via.sharestead.view.preference.PreferenceActivity;
 import dk.via.sharestead.view.dialog.ProgressDialog;
 import dk.via.sharestead.viewmodel.authentication.AuthenticationViewModel;
 

@@ -6,19 +6,9 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/actionShare"
-        android:icon="@drawable/ic_share"
-        android:title="@string/share" />
-
-    <item
-        android:id="@+id/actionWishes"
-        android:icon="@drawable/ic_wishes"
-        android:title="@string/wishes" />
-
-    <item
-        android:id="@+id/actionMessages"
-        android:icon="@drawable/ic_message"
-        android:title="@string/messages" />
+        android:id="@+id/actionNotes"
+        android:icon="@drawable/ic_notes"
+        android:title="@string/notes" />
 
     <item
         android:id="@+id/actionProfile"
