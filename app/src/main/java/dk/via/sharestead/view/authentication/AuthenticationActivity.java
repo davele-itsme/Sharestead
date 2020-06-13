@@ -33,27 +33,19 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.authentication_activity);
 
+        checkInternetPermission();
+
         authenticationViewModel = new ViewModelProvider(this).get(AuthenticationViewModel.class);
         setLayout();
         progressDialog = new ProgressDialog();
     }
 
-    private void setLayout()
-    {
-        emailField = findViewById(R.id.emailField);
-        passwordField = findViewById(R.id.passwordField);
-        passwordLayout = findViewById(R.id.passwordLayout);
-    }
-
     public void onLoginBtnClicked(View view) {
-        //Show progress bar
         progressDialog.show(getSupportFragmentManager(), TAG);
 
-        //Getting strings from fields
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
 
-        //To clear error if user clicks on button again
         passwordLayout.setError(null);
 
         int validation = authenticationViewModel.checkEmptyFields(email, password);
@@ -63,12 +55,10 @@ public class AuthenticationActivity extends AppCompatActivity {
             public void onChanged(String success) {
                 if(success.equals("valid"))
                 {
-                    //Sign in successful
                     startActivity(new Intent(getApplicationContext(), PreferenceActivity.class));
                     finish();
                 }
                 else if (!success.equals("")){
-                    //Sign in not successful
                     showAlertDialog(success);
                 }
                 progressDialog.dismiss();
@@ -76,7 +66,6 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
         });
 
-        //Switch case for validation received from viw model
         switch (validation) {
             case 1:
                 emailField.setError((getResources().getString(R.string.empty_email)));
@@ -87,7 +76,6 @@ public class AuthenticationActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 break;
             default:
-                //If none from above is true, create user with email and password
                 authenticationViewModel.signIn(email, password);
         }
     }
@@ -96,7 +84,6 @@ public class AuthenticationActivity extends AppCompatActivity {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
-    //Method for recovering using email
     public void onForgetPasswordClicked(View view) {
         //Setting view
         LinearLayout linearLayout = new LinearLayout(this);
@@ -107,7 +94,6 @@ public class AuthenticationActivity extends AppCompatActivity {
         linearLayout.addView(emailFieldRecovery);
         linearLayout.setPadding(50, 10, 50, 10);
 
-        //Creating Dialog with above mentioned view
         new AlertDialog.Builder(this)
                 .setTitle(getResources().getString(R.string.recover_dialog_title))
                 .setView(linearLayout)
@@ -157,7 +143,16 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
         });
         authenticationViewModel.sendReset(email);
+    }
 
+    private void checkInternetPermission() {
 
+    }
+
+    private void setLayout()
+    {
+        emailField = findViewById(R.id.emailField);
+        passwordField = findViewById(R.id.passwordField);
+        passwordLayout = findViewById(R.id.passwordLayout);
     }
 }

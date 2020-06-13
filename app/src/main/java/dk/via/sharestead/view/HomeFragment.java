@@ -27,10 +27,6 @@ import dk.via.sharestead.R;
 import dk.via.sharestead.adapter.RecyclerViewAdapter;
 import dk.via.sharestead.viewmodel.HomeViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnListItemClickListener {
     public static final String EXTRA_GAME = "Game ID";
     private RecyclerViewAdapter gridAdapter;
@@ -41,7 +37,7 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     private LinearLayoutManager horizontalLayoutManager;
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -51,7 +47,6 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home_fragment, container, false);
 
     }
@@ -70,7 +65,6 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         ImageView firstGameImage = view.findViewById(R.id.game1Image);
         TextView firstGameName = view.findViewById(R.id.game1Name);
 
-        //Triggered when data in LiveData is changed
         homeViewModel.getGames().observe(getViewLifecycleOwner(), games -> {
             gridAdapter.setGames(games);
             progressBar.setVisibility(View.INVISIBLE);

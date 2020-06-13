@@ -9,16 +9,10 @@ import androidx.fragment.app.Fragment;
 
 import dk.via.sharestead.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShareFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShareFragment extends Fragment {
 
     public ShareFragment() {
-        // Required empty public constructor
+
     }
 
     public static ShareFragment newInstance(String param1, String param2) {
@@ -31,9 +25,7 @@ public class ShareFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
 
-        }
     }
 
     @Override

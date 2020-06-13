@@ -73,7 +73,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         setDialog();
 
         //required for checking permissions
@@ -153,10 +152,8 @@ public class ProfileFragment extends Fragment {
             if (grantResults.length > 0) {
                 boolean writeStorageAccepter = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                 if (writeStorageAccepter) {
-                    //permissions enabled
                     pickFromGallery();
                 } else {
-                    //permissions denied
                     Toast.makeText(getContext(), "Please allow storage permissions", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -232,12 +229,7 @@ public class ProfileFragment extends Fragment {
                     }
                 })
                 .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
+                        (dialog, id) -> dialog.dismiss());
         builder.create().show();
     }
 

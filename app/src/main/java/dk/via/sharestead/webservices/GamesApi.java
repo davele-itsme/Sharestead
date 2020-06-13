@@ -9,7 +9,6 @@ import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
 public interface GamesApi {
-    //asynchronous calls
     @GET("games")
     Call<GamesResponse> getGamesByPreference(@QueryMap Map<String, Object> map);
 

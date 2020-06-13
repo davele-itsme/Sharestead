@@ -40,15 +40,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onRegisterBtnClicked(View view) {
-        //Getting strings from fields
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
         String repeatPassword = repeatPasswordField.getText().toString().trim();
 
-        //Display progress bar
         progressDialog.show(getSupportFragmentManager(), TAG);
 
-        //Set text error to TextInputLayout as it does not disappear automatically
         TextInputLayout passwordLayout = findViewById(R.id.passwordLayout);
         TextInputLayout repeatPasswordLayout = findViewById(R.id.passwordLayoutRepeat);
         repeatPasswordLayout.setError(null);
@@ -60,7 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(String success) {
                 if (success.equals("valid")) {
-                    // Sign in success, getting back to the activity and close this one
                     startActivity(new Intent(getApplicationContext(), AuthenticationActivity.class));
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.register_account_successful), Toast.LENGTH_LONG).show();
                     finish();
@@ -72,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        //Switch case for validation received from viw model
         switch (validation) {
             case 1:
                 emailField.setError((getResources().getString(R.string.empty_email)));
@@ -87,7 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 break;
             default:
-                //If none from above is true, create user with email and password
                 registerViewModel.createUser(email, password);
         }
     }
