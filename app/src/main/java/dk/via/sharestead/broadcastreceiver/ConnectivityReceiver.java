@@ -4,17 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.provider.Settings;
-
-import dk.via.sharestead.R;
 
 public class ConnectivityReceiver extends BroadcastReceiver {
     public boolean isConnected = true;
     String status;
-    Context Cnt;
     Activity activity;
     Activity parent;
     AlertDialog alert;
@@ -34,7 +29,7 @@ public class ConnectivityReceiver extends BroadcastReceiver {
         returnStatus(status, context);
     }
 
-    public void returnStatus(String s, final Context context) {
+    private void returnStatus(String s, final Context context) {
 
         if (s.equals("Mobile data enabled") || s.equals("Wifi enabled")) {
             isConnected = true;
@@ -48,7 +43,8 @@ public class ConnectivityReceiver extends BroadcastReceiver {
             isConnected = false;
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             // Set the Alert Dialog Message
-            builder.setMessage("Internet connection required")
+            builder.setTitle("Internet lost")
+                    .setMessage("Internet connection required. Please check your settings.")
                     .setCancelable(false)
                     .setPositiveButton("Open settings",
                             (dialog, id) -> activity.startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS)))
