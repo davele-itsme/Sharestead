@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
     private BottomNavigationView navigation;
+    private ConnectivityReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,26 +145,17 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        ConnectivityReceiver receiver = new ConnectivityReceiver(this);
+        receiver = new ConnectivityReceiver(this);
         registerReceiver(receiver, filter);
     }
 
-
-    private void showSnackBar(boolean isConnected) {
-        if (isConnected) {
-            Snackbar.make(findViewById(R.id.content), getResources().getString(R.string.online), Snackbar.LENGTH_SHORT)
-                    .setAction("CLOSE", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                        }
-                    })
-                    .setBackgroundTint(Color.GREEN)
-                    .show();
-        } else {
-            Snackbar.make(findViewById(R.id.content), getResources().getString(R.string.offline), Snackbar.LENGTH_SHORT)
-                    .setBackgroundTint(Color.RED)
-                    .show();
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            unregisterReceiver(receiver);
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -52,6 +52,4 @@
     <string name="change_name">Tap to change name</string>
     <string name="home_text2">recommended</string>
     <string name="home_text3">games</string>
-    <string name="offline">You are not connected to internet. Plese check yout connection.</string>
-    <string name="online">You are back online.</string>
 </resources>
