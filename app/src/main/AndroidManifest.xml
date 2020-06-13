@@ -3,6 +3,7 @@
     package="dk.via.sharestead">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
@@ -26,6 +27,14 @@
         <activity
             android:name=".view.PreferenceActivity"
             android:noHistory="true" />
+        <receiver
+            android:name=".broadcastreceiver.ConnectivityReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
+
+
 
 </manifest>

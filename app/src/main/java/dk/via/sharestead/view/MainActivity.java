@@ -6,19 +6,24 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import dk.via.sharestead.R;
+import dk.via.sharestead.broadcastreceiver.ConnectivityReceiver;
 import dk.via.sharestead.view.authentication.AuthenticationActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -132,5 +137,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("navigationId", navigation.getSelectedItemId());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        ConnectivityReceiver receiver = new ConnectivityReceiver(this);
+        registerReceiver(receiver, filter);
+    }
+
+
+    private void showSnackBar(boolean isConnected) {
+        if (isConnected) {
+            Snackbar.make(findViewById(R.id.content), getResources().getString(R.string.online), Snackbar.LENGTH_SHORT)
+                    .setAction("CLOSE", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    })
+                    .setBackgroundTint(Color.GREEN)
+                    .show();
+        } else {
+            Snackbar.make(findViewById(R.id.content), getResources().getString(R.string.offline), Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(Color.RED)
+                    .show();
+        }
     }
 }
