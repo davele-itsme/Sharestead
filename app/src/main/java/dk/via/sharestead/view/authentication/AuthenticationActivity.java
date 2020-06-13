@@ -85,7 +85,6 @@ public class AuthenticationActivity extends AppCompatActivity {
     }
 
     public void onForgetPasswordClicked(View view) {
-        //Setting view
         LinearLayout linearLayout = new LinearLayout(this);
         EditText emailFieldRecovery = new EditText(this);
         emailFieldRecovery.setHint(getResources().getString(R.string.hint_email));
