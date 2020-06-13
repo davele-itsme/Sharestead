@@ -13,12 +13,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class AuthRepository {
-    private Application application;
     private FirebaseAuth mAuth;
+
     private MutableLiveData<String> registerSuccess;
     private MutableLiveData<String> loginSuccess;
     private MutableLiveData<String> resetSuccess;
+
     private static AuthRepository instance;
+    private Application application;
 
     public AuthRepository(Application application) {
         this.application = application;
@@ -42,7 +44,6 @@ public class AuthRepository {
                         registerSuccess.setValue("valid");
                         registerSuccess = new MutableLiveData<>();
 
-                        //Geting data from FireBaseUser
                         FirebaseUser user = mAuth.getCurrentUser();
                         String validEmail = user.getEmail();
                         String validUId = user.getUid();
@@ -54,12 +55,10 @@ public class AuthRepository {
                         hashMap.put("name", "");
                         hashMap.put("image", "");
 
-                        //Storing it to firebase database instance
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference reference = database.getReference("Users");
                         reference.child(validUId).setValue(hashMap);
                     } else {
-                        // If sign in fails, display a message to the user.
                         if (task.getException() != null) {
                             registerSuccess.setValue(task.getException().getMessage());
                             registerSuccess = new MutableLiveData<>();
@@ -77,11 +76,9 @@ public class AuthRepository {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Sign in successful
                         loginSuccess.setValue("valid");
                         loginSuccess = new MutableLiveData<>();
                     } else {
-                        // If sign in fails, display a message to the user.
                         if (task.getException() != null) {
                             loginSuccess.setValue(task.getException().getMessage());
                             loginSuccess = new MutableLiveData<>();

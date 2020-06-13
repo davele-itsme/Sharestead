@@ -1,4 +1,4 @@
-package dk.via.sharestead.viewmodel;
+package dk.via.sharestead.viewmodel.authentication;
 
 import android.app.Application;
 import android.text.TextUtils;

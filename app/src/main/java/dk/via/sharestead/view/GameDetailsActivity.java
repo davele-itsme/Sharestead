@@ -5,8 +5,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,13 +16,12 @@ import com.squareup.picasso.Picasso;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.viewmodel.GameDetailsViewModel;
-import me.biubiubiu.justifytext.library.JustifyTextView;
 
 public class GameDetailsActivity extends AppCompatActivity {
     private GameDetailsViewModel viewModel;
     private ImageView gameImage;
     private TextView gameName, developerName, metacritic, released;
-    private JustifyTextView description;
+    private WebView description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,12 @@ public class GameDetailsActivity extends AppCompatActivity {
             developerName.setText(gameDetails.getDevelopers().get(0).getName());
             metacritic.setText(String.valueOf(gameDetails.getMetacritic()));
             released.setText(gameDetails.getReleased());
-            description.setText(gameDetails.getDescription());
+
+            String text;
+            text = "<html><body><p align=\"justify\">";
+            text+= gameDetails.getDescription();
+            text+= "</p></body></html>";
+            description.loadData(text, "text/html", "utf-8");
         });
 
     }

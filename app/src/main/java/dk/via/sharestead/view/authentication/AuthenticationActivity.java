@@ -19,7 +19,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import dk.via.sharestead.R;
 import dk.via.sharestead.view.PreferenceActivity;
 import dk.via.sharestead.view.dialog.ProgressDialog;
-import dk.via.sharestead.viewmodel.AuthenticationViewModel;
+import dk.via.sharestead.viewmodel.authentication.AuthenticationViewModel;
 
 public class AuthenticationActivity extends AppCompatActivity {
     private EditText emailField, passwordField;

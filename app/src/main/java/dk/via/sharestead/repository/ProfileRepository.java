@@ -32,11 +32,13 @@ public class ProfileRepository {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
-    private static ProfileRepository instance;
+
     private MutableLiveData<String[]> textLiveData = new MutableLiveData<>();
     private MutableLiveData<String> updateImage = new MutableLiveData<>();
     private MutableLiveData<Boolean> updateName = new MutableLiveData<>();
+
     private static final String STORAGE_PATH = "Users_Profile_Image";
+    private static ProfileRepository instance;
     private Application application;
 
     public ProfileRepository(Application application) {
@@ -86,35 +88,29 @@ public class ProfileRepository {
     public void uploadImageWithUri(Uri uri) {
         String filePath = STORAGE_PATH + "" + user.getUid();
         StorageReference storageReference1 = storageReference.child(filePath);
-        storageReference1.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isSuccessful()) ;
-                Uri downloadUri = uriTask.getResult();
+        storageReference1.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+            while (!uriTask.isSuccessful()) ;
+            Uri downloadUri = uriTask.getResult();
 
-                //Check if image is uploaded
-                if (uriTask.isSuccessful()) {
-                    //update url in user database
-                    HashMap<String, Object> results = new HashMap<>();
-                    results.put("image", downloadUri.toString());
-                    databaseReference.child(user.getUid()).updateChildren(results).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            updateImage.setValue("success");
-                            updateImage = new MutableLiveData<>();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            updateImage.setValue("error update");
-                            updateImage = new MutableLiveData<>();
-                        }
-                    });
-                } else {
-                    updateImage.setValue("error");
+            //Check if image is uploaded
+            if (uriTask.isSuccessful()) {
+                //update url in user database
+                HashMap<String, Object> results = new HashMap<>();
+                results.put("image", downloadUri.toString());
+                databaseReference.child(user.getUid()).updateChildren(results).addOnSuccessListener(aVoid -> {
+                    updateImage.setValue("success");
                     updateImage = new MutableLiveData<>();
-                }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        updateImage.setValue("error update");
+                        updateImage = new MutableLiveData<>();
+                    }
+                });
+            } else {
+                updateImage.setValue("error");
+                updateImage = new MutableLiveData<>();
             }
         });
     }
@@ -124,16 +120,13 @@ public class ProfileRepository {
     }
 
     public void changeName(HashMap<String, Object> hashMap) {
-        databaseReference.child(user.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    updateName.setValue(true);
-                } else {
-                    updateName.setValue(false);
-                }
-                updateName = new MutableLiveData<>();
+        databaseReference.child(user.getUid()).updateChildren(hashMap).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                updateName.setValue(true);
+            } else {
+                updateName.setValue(false);
             }
+            updateName = new MutableLiveData<>();
         });
     }
 

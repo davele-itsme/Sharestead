@@ -15,7 +15,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.view.dialog.ProgressDialog;
-import dk.via.sharestead.viewmodel.RegisterViewModel;
+import dk.via.sharestead.viewmodel.authentication.RegisterViewModel;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText emailField, passwordField, repeatPasswordField;

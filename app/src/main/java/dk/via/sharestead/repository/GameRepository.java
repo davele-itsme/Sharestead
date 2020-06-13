@@ -24,6 +24,7 @@ public class GameRepository {
     private MutableLiveData<List<Game>> games;
     private MutableLiveData<List<Game>> moreGames;
     private MutableLiveData<GameDetails> gameDetails;
+
     private static GameRepository instance;
     private Application application;
     private GamesApi gamesAPI;
