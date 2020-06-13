@@ -64,6 +64,26 @@ public class GameAPIClient {
         });
     }
 
+    public void requestMoreVRGames() {
+        Call<GamesResponse> call = gamesAPI.getMoreVRGames();
+        call.enqueue(new Callback<GamesResponse>() {
+            @Override
+            public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    moreGames.setValue(response.body().getResults());
+                } else {
+
+                    Toast.makeText(application, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GamesResponse> call, Throwable t) {
+                Toast.makeText(application, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void requestPlatformId(String platform)
     {
         Call<PlatformResponse> call = gamesAPI.getPlatformId();

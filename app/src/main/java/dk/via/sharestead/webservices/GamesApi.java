@@ -12,12 +12,15 @@ public interface GamesApi {
     @GET("games")
     Call<GamesResponse> getGamesByPreference(@QueryMap Map<String, Object> map);
 
-    @GET("games?tags=vr&ordering=-rating")
-    Call<GamesResponse> getVRGames();
-
     @GET("platforms/lists/parents")
     Call<PlatformResponse> getPlatformId();
 
     @GET("games/{id}")
     Call<GameDetails> getGameDetails(@Path("id") int id);
+
+    @GET("games?tags=vr&ordering=-rating")
+    Call<GamesResponse> getVRGames();
+
+    @GET("games?tags=vr&ordering=-rating&page=2")
+    Call<GamesResponse> getMoreVRGames();
 }

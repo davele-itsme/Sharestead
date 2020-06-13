@@ -40,6 +40,7 @@ public class GameRepository {
 
     public void requestVRGames() {
         gameAPIClient.requestVRGames();
+        gameAPIClient.requestMoreVRGames();
     }
 
     public void requestPlatformId(String platform) {
