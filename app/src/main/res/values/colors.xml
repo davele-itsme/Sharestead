@@ -6,10 +6,7 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="color_primary_light">#A893A8</color>
-    <color name="background">#E0E0E0</color>
     <color name="gray">#9695A8</color>
-    <color name="google_red">#D9372B</color>
-    <color name="fb_blue">#36609F</color>
     <color name="status_bar">#F5F5F5</color>
     <color name="background_filter">#55000000</color>
 </resources>

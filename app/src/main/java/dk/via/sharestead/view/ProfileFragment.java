@@ -50,10 +50,6 @@ import dk.via.sharestead.viewmodel.ProfileViewModel;
 import static android.app.Activity.RESULT_OK;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
- */
 public class ProfileFragment extends Fragment {
     private static final String TAG = "Progress dialog";
     private ProgressDialog progressDialog;
@@ -67,30 +63,49 @@ public class ProfileFragment extends Fragment {
     private ProfileViewModel profileViewModel;
 
     public ProfileFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setDialog();
-
-        //required for checking permissions
-        storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         return inflater.inflate(R.layout.profile_fragment, container, false);
-    }
-
-    private void setDialog() {
-        progressDialog = new ProgressDialog();
-        progressDialog.show(getActivity().getSupportFragmentManager(), TAG);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         setText(view);
         setOnClickListeners();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == STORAGE_REQUEST_CODE) {
+            if (grantResults.length > 0) {
+                boolean writeStorageAccepter = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                if (writeStorageAccepter) {
+                    pickFromGallery();
+                } else {
+                    Toast.makeText(getContext(), "Please allow storage permissions", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == STORAGE_PICK_REQUEST_CODE && data != null) {
+                uri = data.getData();
+                uploadImageWithUri(uri);
+            }
+        }
     }
 
     private void setText(View view) {
@@ -113,7 +128,11 @@ public class ProfileFragment extends Fragment {
                 progressDialog.dismiss();
             }
         });
+    }
 
+    private void setDialog() {
+        progressDialog = new ProgressDialog();
+        progressDialog.show(getActivity().getSupportFragmentManager(), TAG);
     }
 
     private void setOnClickListeners() {
@@ -145,36 +164,12 @@ public class ProfileFragment extends Fragment {
         ActivityCompat.requestPermissions(getActivity(), storagePermissions, STORAGE_REQUEST_CODE);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == STORAGE_REQUEST_CODE) {
-            if (grantResults.length > 0) {
-                boolean writeStorageAccepter = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                if (writeStorageAccepter) {
-                    pickFromGallery();
-                } else {
-                    Toast.makeText(getContext(), "Please allow storage permissions", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
+
 
     private void pickFromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, STORAGE_PICK_REQUEST_CODE);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == STORAGE_PICK_REQUEST_CODE && data != null) {
-                uri = data.getData();
-                uploadImageWithUri(uri);
-            }
-        }
     }
 
     private void uploadImageWithUri(Uri uri) {

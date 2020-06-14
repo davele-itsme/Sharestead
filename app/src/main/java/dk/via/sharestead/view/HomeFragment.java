@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
@@ -54,8 +53,10 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar = view.findViewById(R.id.progressBar);
 
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
+        progressBar = view.findViewById(R.id.progressBar);
         LinearLayout homeLayout = view.findViewById(R.id.homeFragmentLayout);
         homeLayout.setVisibility(View.GONE);
 
@@ -85,7 +86,13 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
                 startActivity(intent);
             }
         });
+    }
 
+    @Override
+    public void onListItemClick(int gameId) {
+        Intent intent = new Intent(getContext(), GameDetailsActivity.class);
+        intent.putExtra(EXTRA_GAME, gameId);
+        startActivity(intent);
     }
 
     private void setRecyclerView(View view) {
@@ -105,13 +112,5 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
         String platformPreference = sharedPreferences.getString("platformPreference", "Platform");
         homeViewModel.setPlatformGames(platformPreference);
-    }
-
-
-    @Override
-    public void onListItemClick(int gameId) {
-        Intent intent = new Intent(getContext(), GameDetailsActivity.class);
-        intent.putExtra(EXTRA_GAME, gameId);
-        startActivity(intent);
     }
 }

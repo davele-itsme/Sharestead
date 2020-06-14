@@ -38,13 +38,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="300dp"
-            android:text="TEXT HOLDER"
+            android:layout_marginTop="280dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="@string/text_holder"
             android:textColor="@color/white"
             android:textSize="25sp" />
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="360dp"
@@ -69,26 +72,26 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TEXT HOLDER"
+                        android:text="@string/text_holder"
                         android:textSize="18sp" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginStart="50dp"
-                        android:background="@drawable/custom_button">
+                        android:background="@drawable/custom_shape">
 
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/custom_button">
+                            android:background="@drawable/custom_shape">
 
                             <TextView
                                 android:id="@+id/metacritic"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="100"
+                                android:text="@string/text_holder"
                                 android:textColor="@color/white"
                                 android:textSize="20sp" />
                         </FrameLayout>
@@ -100,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="TEXT HOLDER"
+                    android:text="@string/text_holder"
                     android:textColor="@color/gray" />
 
                 <WebView

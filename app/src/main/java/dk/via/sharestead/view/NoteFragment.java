@@ -5,32 +5,58 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import java.util.List;
 
 import dk.via.sharestead.R;
+import dk.via.sharestead.adapter.NoteAdapter;
+import dk.via.sharestead.model.Note;
+import dk.via.sharestead.viewmodel.HomeViewModel;
+import dk.via.sharestead.viewmodel.NoteViewModel;
 
 public class NoteFragment extends Fragment {
+    private NoteViewModel noteViewModel;
+    private StaggeredGridLayoutManager manager;
+    private NoteAdapter noteAdapter;
 
     public NoteFragment() {
-
-    }
-
-    public static NoteFragment newInstance(String param1, String param2) {
-        NoteFragment fragment = new NoteFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         return inflater.inflate(R.layout.note_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        setRecyclerView(view);
+        noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
+        noteViewModel.getAllNotes().observe(getViewLifecycleOwner(), new Observer<List<Note>>() {
+            @Override
+            public void onChanged(List<Note> notes) {
+                noteAdapter.setNotes(notes);
+            }
+        });
+    }
+
+    private void setRecyclerView(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.noteRecyclerView);
+        recyclerView.setLayoutManager(manager);
+        noteAdapter = new NoteAdapter(getContext());
+        recyclerView.setAdapter(noteAdapter);
     }
 }
