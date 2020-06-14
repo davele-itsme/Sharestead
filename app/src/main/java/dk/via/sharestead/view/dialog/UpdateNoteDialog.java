@@ -19,7 +19,7 @@ import androidx.fragment.app.DialogFragment;
 import dk.via.sharestead.R;
 import dk.via.sharestead.model.Note;
 
-public class AddNoteDialog extends DialogFragment {
+public class UpdateNoteDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -29,12 +29,20 @@ public class AddNoteDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.note_dialog, null);
         builder.setView(view);
 
+        Bundle mArgs = getArguments();
+        Note note = (Note) mArgs.getSerializable("note_set_text");
+
         Button addNoteBtn = view.findViewById(R.id.addNoteBtn);
         EditText title = view.findViewById(R.id.noteTitle);
         EditText priority = view.findViewById(R.id.notePriority);
         EditText description = view.findViewById(R.id.noteDescription);
         ImageButton backArrow = view.findViewById(R.id.backArrow);
         CheckBox favourite = view.findViewById(R.id.favouriteCheckBox);
+
+        title.setText(note.getTitle());
+        priority.setText(String.valueOf(note.getPriority()));
+        description.setText(note.getDescription());
+        favourite.setChecked(note.isFavourite());
 
         backArrow.setOnClickListener(view1 -> getDialog().dismiss());
 
@@ -51,9 +59,10 @@ public class AddNoteDialog extends DialogFragment {
                 }
                 boolean favouriteBoolean = favourite.isChecked();
 
-                Note note = new Note(titleText, descriptionText, priorityNum, favouriteBoolean);
+                Note newNote = new Note(titleText, descriptionText, priorityNum, favouriteBoolean);
+                newNote.setId(note.getId());
                 Intent intent = new Intent();
-                intent.putExtra("note_details_add", note);
+                intent.putExtra("note_details_update", newNote);
                 getTargetFragment().onActivityResult(
                         getTargetRequestCode(), Activity.RESULT_OK, intent);
                 getDialog().dismiss();

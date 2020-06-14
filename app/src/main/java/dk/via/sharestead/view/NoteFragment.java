@@ -26,11 +26,14 @@ import dk.via.sharestead.R;
 import dk.via.sharestead.adapter.NoteAdapter;
 import dk.via.sharestead.model.Note;
 import dk.via.sharestead.view.dialog.AddNoteDialog;
+import dk.via.sharestead.view.dialog.UpdateNoteDialog;
 import dk.via.sharestead.viewmodel.NoteViewModel;
 
 public class NoteFragment extends Fragment implements NoteAdapter.OnListItemClickListener, NoteAdapter.OnListItemLongClickListener {
-    private static final String TAG = "Add note dialog";
+    private static final String TAG_ADD = "Add note dialog";
+    private static final String TAG_UPDATE = "Update note dialog";
     private static final int REQUEST_CODE = 100;
+    private static final int REQUEST_CODE_UPDATE = 101;
     private NoteViewModel noteViewModel;
     private StaggeredGridLayoutManager manager;
     private NoteAdapter noteAdapter;
@@ -71,19 +74,25 @@ public class NoteFragment extends Fragment implements NoteAdapter.OnListItemClic
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    Note note = (Note) data.getSerializableExtra("note_details");
-                    noteViewModel.insert(note);
-                }
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.hasExtra("note_details_add")) {
+                Toast.makeText(getContext(), "IT WORKS", Toast.LENGTH_SHORT).show();
+                Note note = (Note) data.getSerializableExtra("note_details_add");
+                noteViewModel.insert(note);
+            }
+        } else if (requestCode == REQUEST_CODE_UPDATE && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.hasExtra("note_details_update")) {
+                Toast.makeText(getContext(), "IT WORKS", Toast.LENGTH_SHORT).show();
+                Note note = (Note) data.getSerializableExtra("note_details_update");
+                noteViewModel.update(note);
+
             }
         }
     }
 
     @Override
     public void onListItemClick(Note note) {
-
+        showUpdateNoteDialog(note);
     }
 
     @Override
@@ -101,7 +110,7 @@ public class NoteFragment extends Fragment implements NoteAdapter.OnListItemClic
     private void showAddNoteDialog() {
         AddNoteDialog addNoteDialog = new AddNoteDialog();
         addNoteDialog.setTargetFragment(this, REQUEST_CODE);
-        addNoteDialog.show(getActivity().getSupportFragmentManager(), TAG);
+        addNoteDialog.show(getActivity().getSupportFragmentManager(), TAG_ADD);
     }
 
     private void showDeleteDialog(Note note) {
@@ -117,6 +126,15 @@ public class NoteFragment extends Fragment implements NoteAdapter.OnListItemClic
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void showUpdateNoteDialog(Note note) {
+        Bundle args = new Bundle();
+        args.putSerializable("note_set_text", note);
+        UpdateNoteDialog updateNoteDialog = new UpdateNoteDialog();
+        updateNoteDialog.setTargetFragment(this, REQUEST_CODE_UPDATE);
+        updateNoteDialog.setArguments(args);
+        updateNoteDialog.show(getActivity().getSupportFragmentManager(), TAG_UPDATE);
     }
 
 
