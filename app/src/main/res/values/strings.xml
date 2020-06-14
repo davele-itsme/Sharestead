@@ -63,4 +63,6 @@
     <string name="note_deleted">Note deleted</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="privacy_policy_message">You will be redirected to our web page with privacy policy.</string>
+    <string name="understand" translatable="false">Understand</string>
+    <string name="function_not_implemented">This function is not yet implemented</string>
 </resources>

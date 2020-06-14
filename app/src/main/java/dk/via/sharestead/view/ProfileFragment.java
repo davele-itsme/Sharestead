@@ -148,27 +148,16 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showPrivacyPolicyDialog();
-
             }
         });
 
-    }
-
-    private void showPrivacyPolicyDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(getResources().getString(R.string.privacy_policy));
-        builder.setMessage(getResources().getString(R.string.privacy_policy_message));
-
-        builder.setPositiveButton(getResources().getString(R.string.okay), (dialogInterface, i) -> {
-            String url = "https://sharestead.flycricket.io/privacy.html";
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(url));
-            startActivity(intent);
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showHelpDialog();
+            }
         });
-        builder.setNeutralButton(getResources().getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     private boolean checkStoragePermission() {
@@ -179,8 +168,6 @@ public class ProfileFragment extends Fragment {
     private void requestStoragePermission() {
         ActivityCompat.requestPermissions(getActivity(), storagePermissions, STORAGE_REQUEST_CODE);
     }
-
-
 
     private void pickFromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -239,6 +226,37 @@ public class ProfileFragment extends Fragment {
                 .setNegativeButton("Cancel",
                         (dialog, id) -> dialog.dismiss());
         builder.create().show();
+    }
+
+    private void showPrivacyPolicyDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(getResources().getString(R.string.privacy_policy));
+        builder.setMessage(getResources().getString(R.string.privacy_policy_message));
+
+        builder.setPositiveButton(getResources().getString(R.string.okay), (dialogInterface, i) -> {
+            String url = "https://sharestead.flycricket.io/privacy.html";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
+        });
+        builder.setNeutralButton(getResources().getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(getResources().getString(R.string.help_and_support));
+        builder.setMessage(getResources().getString(R.string.function_not_implemented));
+
+        builder.setPositiveButton(getResources().getString(R.string.understand), (dialogInterface, i) -> {
+                dialogInterface.dismiss();
+        });
+        builder.setNeutralButton(getResources().getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }
