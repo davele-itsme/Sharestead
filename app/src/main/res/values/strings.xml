@@ -52,4 +52,9 @@
     <string name="home_text3">games</string>
     <string name="logo">Logo</string>
     <string name="text_holder" translatable="false">TEXT HOLDER</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="back_arrow">Get back</string>
+    <string name="favourite">Favourite</string>
+    <string name="add_note">Add note</string>
 </resources>

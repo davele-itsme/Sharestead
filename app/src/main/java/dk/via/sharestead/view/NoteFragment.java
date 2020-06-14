@@ -10,16 +10,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 import dk.via.sharestead.R;
 import dk.via.sharestead.adapter.NoteAdapter;
 import dk.via.sharestead.model.Note;
-import dk.via.sharestead.viewmodel.HomeViewModel;
 import dk.via.sharestead.viewmodel.NoteViewModel;
 
 public class NoteFragment extends Fragment {
@@ -51,6 +51,14 @@ public class NoteFragment extends Fragment {
                 noteAdapter.setNotes(notes);
             }
         });
+
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddNoteDialog();
+            }
+        });
     }
 
     private void setRecyclerView(View view) {
@@ -58,5 +66,9 @@ public class NoteFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         noteAdapter = new NoteAdapter(getContext());
         recyclerView.setAdapter(noteAdapter);
+    }
+
+    private void showAddNoteDialog() {
+
     }
 }

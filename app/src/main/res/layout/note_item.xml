@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="@dimen/general_margin">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:id="@+id/noteDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/general_margin"
             android:textColor="@color/gray"
             android:text="@string/text_holder" />
 

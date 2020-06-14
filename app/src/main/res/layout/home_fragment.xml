@@ -21,7 +21,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="@dimen/general_margin"
                 android:background="@drawable/custom_shape"
                 android:orientation="horizontal">
 
@@ -29,8 +29,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="@dimen/general_margin"
+                    android:layout_marginBottom="@dimen/general_margin"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -84,8 +84,8 @@
                     android:id="@+id/game1Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/general_margin"
+                    android:layout_marginStart="@dimen/general_margin"
                     android:fontFamily="@font/open_sans_bold"
                     android:textSize="@dimen/title_text_size" />
 
@@ -93,7 +93,7 @@
                     android:id="@+id/game1Image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_margin="@dimen/general_margin"
                     android:contentDescription="@string/description_recommended_main_game"
                     android:scaleType="centerCrop" />
 
@@ -101,7 +101,7 @@
                     android:id="@+id/bestGamesTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="@dimen/general_margin"
                     android:layout_marginTop="50dp"
                     android:fontFamily="@font/open_sans_bold"
                     android:text="@string/best_games"
@@ -119,7 +119,7 @@
                 android:id="@+id/bestUpcomingTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="@dimen/general_margin"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/open_sans_bold"
                 android:text="@string/best_more_games"

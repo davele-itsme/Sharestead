@@ -29,7 +29,7 @@
                 android:id="@+id/emailField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="@dimen/general_margin"
                 android:ems="10"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress" />
@@ -38,7 +38,7 @@
                 android:id="@+id/passwordLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="@dimen/general_margin"
                 app:passwordToggleEnabled="true">
 
                 <EditText
@@ -71,14 +71,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/general_margin"
                 android:onClick="onRegisterBtnClicked"
                 android:text="@string/sign_up" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/general_margin"
                 android:orientation="horizontal">
 
                 <View

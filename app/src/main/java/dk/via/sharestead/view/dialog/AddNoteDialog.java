@@ -11,14 +11,14 @@ import androidx.fragment.app.DialogFragment;
 
 import dk.via.sharestead.R;
 
-public class ProgressDialog extends DialogFragment {
+public class AddNoteDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new
                 AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.progress_dialog, null));
+        builder.setView(inflater.inflate(R.layout.add_note_dialog, null));
         return builder.create();
     }
 }
