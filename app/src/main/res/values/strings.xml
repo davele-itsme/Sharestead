@@ -7,7 +7,7 @@
     <string name="preference_explore">Explore</string>
     <string name="home">Home</string>
     <string name="notes">Notes</string>
-    <string name="profile">Profile</string>
+    <string name="privacy_policy_text">Privacy policy</string>
     <string name="description_recommended_main_game">Recommended popular game</string>
     <string name="best_games">Cool recent games</string>
     <string name="best_more_games">Something for you!</string>
@@ -61,4 +61,6 @@
     <string name="delete_note_title">Delete note</string>
     <string name="delete_note_message">Are you sure you want to delete this note?</string>
     <string name="note_deleted">Note deleted</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="privacy_policy_message">You will be redirected to our web page with privacy policy.</string>
 </resources>

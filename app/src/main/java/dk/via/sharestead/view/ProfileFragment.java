@@ -23,24 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dk.via.sharestead.R;
@@ -53,9 +36,12 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileFragment extends Fragment {
     private static final String TAG = "Progress dialog";
     private ProgressDialog progressDialog;
-    TextView nameText;
-    TextView emailText;
-    CircleImageView imageView;
+    private TextView nameText;
+    private TextView emailText;
+    private CircleImageView imageView;
+    private TextView settings;
+    private TextView help;
+    private TextView privacyPolicy;
     private static final int STORAGE_REQUEST_CODE = 100;
     private static final int STORAGE_PICK_REQUEST_CODE = 200;
     private String[] storagePermissions;
@@ -78,7 +64,8 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        setText(view);
+        setViews(view);
+        setText();
         setOnClickListeners();
     }
 
@@ -108,11 +95,17 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private void setText(View view) {
-        profileViewModel.setText();
+    private void setViews(View view) {
         nameText = view.findViewById(R.id.profileName);
         emailText = view.findViewById(R.id.profileEmail);
         imageView = view.findViewById(R.id.profileImage);
+        settings = view.findViewById(R.id.settings);
+        help = view.findViewById(R.id.help);
+        privacyPolicy = view.findViewById(R.id.privacyPolicy);
+    }
+
+    private void setText() {
+        profileViewModel.setText();
         profileViewModel.getTextLiveData().observe(getViewLifecycleOwner(), new Observer<String[]>() {
             @Override
             public void onChanged(String[] strings) {
@@ -153,6 +146,32 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
+        privacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPrivacyPolicyDialog();
+
+            }
+        });
+
+    }
+
+    private void showPrivacyPolicyDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(getResources().getString(R.string.privacy_policy));
+        builder.setMessage(getResources().getString(R.string.privacy_policy_message));
+
+        builder.setPositiveButton(getResources().getString(R.string.okay), (dialogInterface, i) -> {
+            String url = "https://sharestead.flycricket.io/privacy.html";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
+        });
+        builder.setNeutralButton(getResources().getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private boolean checkStoragePermission() {

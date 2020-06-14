@@ -13,5 +13,5 @@
     <item
         android:id="@+id/actionProfile"
         android:icon="@drawable/ic_profile"
-        android:title="@string/profile" />
+        android:title="@string/privacy_policy_text" />
 </menu>
