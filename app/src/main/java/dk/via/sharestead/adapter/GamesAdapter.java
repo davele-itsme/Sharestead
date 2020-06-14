@@ -17,14 +17,14 @@ import java.util.List;
 import dk.via.sharestead.R;
 import dk.via.sharestead.model.Game;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.GameHolder> {
+public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GameHolder> {
     private OnListItemClickListener listener;
     private List<Game> games;
     private Context context;
     private String type;
 
 
-    public RecyclerViewAdapter(String type, Context context, OnListItemClickListener listener) {
+    public GamesAdapter(String type, Context context, OnListItemClickListener listener) {
         this.type = type;
         this.listener = listener;
         this.context = context;

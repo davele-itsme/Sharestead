@@ -24,13 +24,13 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import dk.via.sharestead.R;
-import dk.via.sharestead.adapter.RecyclerViewAdapter;
+import dk.via.sharestead.adapter.GamesAdapter;
 import dk.via.sharestead.viewmodel.HomeViewModel;
 
-public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnListItemClickListener {
+public class HomeFragment extends Fragment implements GamesAdapter.OnListItemClickListener {
     public static final String EXTRA_GAME = "Game ID";
-    private RecyclerViewAdapter gridAdapter;
-    private RecyclerViewAdapter horizontalAdapter;
+    private GamesAdapter gridAdapter;
+    private GamesAdapter horizontalAdapter;
     private HomeViewModel homeViewModel;
     private ProgressBar progressBar;
     private GridLayoutManager gridLayoutManager;
@@ -99,8 +99,8 @@ public class HomeFragment extends Fragment implements RecyclerViewAdapter.OnList
         RecyclerView gridRecyclerView = view.findViewById(R.id.gridRecyclerView);
         RecyclerView horizontalRecyclerView = view.findViewById(R.id.horizontalRecyclerView);
 
-        gridAdapter = new RecyclerViewAdapter("grid", getContext(), this);
-        horizontalAdapter = new RecyclerViewAdapter("horizontal", getContext(), this);
+        gridAdapter = new GamesAdapter("grid", getContext(), this);
+        horizontalAdapter = new GamesAdapter("horizontal", getContext(), this);
 
         gridRecyclerView.setAdapter(gridAdapter);
         horizontalRecyclerView.setAdapter(horizontalAdapter);

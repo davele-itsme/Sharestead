@@ -18,11 +18,15 @@ import dk.via.sharestead.R;
 import dk.via.sharestead.model.Note;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
+    private OnListItemClickListener clickListener;
+    private OnListItemLongClickListener longClickListener;
     private List<Note> notes = new ArrayList<>();
     private Context context;
 
-    public NoteAdapter(Context context) {
+    public NoteAdapter(Context context, OnListItemClickListener clickListener, OnListItemLongClickListener longClickListener) {
         this.context = context;
+        this.clickListener = clickListener;
+        this.longClickListener = longClickListener;
     }
 
     @NonNull
@@ -30,7 +34,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.note_item, parent, false);
-        return new NoteHolder(itemView);
+        return new NoteHolder(itemView, clickListener, longClickListener);
     }
 
     @Override
@@ -63,18 +67,43 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         notifyDataSetChanged();
     }
 
-    class NoteHolder extends RecyclerView.ViewHolder {
+    class NoteHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private CardView noteLayout;
         private TextView noteTitle;
         private TextView notePriority;
         private TextView noteDescription;
+        private OnListItemClickListener clickListener;
+        private OnListItemLongClickListener longClickListener;
 
-        public NoteHolder(View itemView) {
+        public NoteHolder(View itemView, OnListItemClickListener clickListener, OnListItemLongClickListener longClickListener) {
             super(itemView);
             noteLayout = itemView.findViewById(R.id.noteLayout);
             noteTitle = itemView.findViewById(R.id.noteTitle);
             notePriority = itemView.findViewById(R.id.notePriority);
             noteDescription = itemView.findViewById(R.id.noteDescription);
+            this.clickListener = clickListener;
+            this.longClickListener = longClickListener;
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.onListItemClick(notes.get(getAdapterPosition()));
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            longClickListener.onListItemLongClick(notes.get(getAdapterPosition()));
+            return true;
+        }
+    }
+
+    public interface OnListItemClickListener {
+        void onListItemClick(Note note);
+    }
+
+    public interface OnListItemLongClickListener {
+        void onListItemLongClick(Note note);
     }
 }

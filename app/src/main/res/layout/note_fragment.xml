@@ -10,7 +10,10 @@
         android:id="@+id/noteRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingBottom="80dp"
         tools:listitem="@layout/note_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -20,6 +23,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/general_margin"
         android:layout_marginBottom="100dp"
+        android:elevation="5dp"
         android:src="@drawable/ic_add" />
 
 </FrameLayout>
