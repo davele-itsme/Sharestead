@@ -56,33 +56,21 @@ public class NoteFragment extends Fragment implements NoteAdapter.OnListItemClic
 
         setRecyclerView(view);
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-        noteViewModel.getAllNotes().observe(getViewLifecycleOwner(), new Observer<List<Note>>() {
-            @Override
-            public void onChanged(List<Note> notes) {
-                noteAdapter.setNotes(notes);
-            }
-        });
+        noteViewModel.getAllNotes().observe(getViewLifecycleOwner(), notes -> noteAdapter.setNotes(notes));
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAddNoteDialog();
-            }
-        });
+        fab.setOnClickListener(view1 -> showAddNoteDialog());
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             if (data != null && data.hasExtra("note_details_add")) {
-                Toast.makeText(getContext(), "IT WORKS", Toast.LENGTH_SHORT).show();
                 Note note = (Note) data.getSerializableExtra("note_details_add");
                 noteViewModel.insert(note);
             }
         } else if (requestCode == REQUEST_CODE_UPDATE && resultCode == Activity.RESULT_OK) {
             if (data != null && data.hasExtra("note_details_update")) {
-                Toast.makeText(getContext(), "IT WORKS", Toast.LENGTH_SHORT).show();
                 Note note = (Note) data.getSerializableExtra("note_details_update");
                 noteViewModel.update(note);
 

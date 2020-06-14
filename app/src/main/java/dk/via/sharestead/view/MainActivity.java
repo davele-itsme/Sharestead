@@ -2,6 +2,7 @@ package dk.via.sharestead.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -53,12 +54,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, AuthenticationActivity.class));
             finish();
         }
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.app_bar_menu, menu);
-        return true;
+        setToolbar();
     }
 
     @Override
@@ -148,4 +145,9 @@ public class MainActivity extends AppCompatActivity {
             doubleBackToExitPressedOnce = false;
         }
     };
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.customToolbar);
+        setSupportActionBar(toolbar);
+    }
 }
