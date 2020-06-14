@@ -57,4 +57,5 @@
     <string name="back_arrow">Get back</string>
     <string name="favourite">Favourite</string>
     <string name="add_note">Add note</string>
+    <string name="priority">Priority</string>
 </resources>

@@ -28,16 +28,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"
+            android:windowSoftInputMode="adjustPan"
             android:name=".view.MainActivity" />
         <activity
             android:name=".view.preference.PreferenceActivity"
             android:noHistory="true" />
-        <receiver
-            android:name=".broadcastreceiver.ConnectivityReceiver" >
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
     </application>
 
 

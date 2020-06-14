@@ -42,6 +42,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             holder.notePriority.setTextColor(Color.WHITE);
             holder.noteDescription.setTextColor(Color.WHITE);
         }
+        else {
+            holder.noteLayout.setBackground(context.getResources().getDrawable(R.drawable.custom_shape_white, null));
+            holder.noteTitle.setTextColor(Color.BLACK);
+            holder.notePriority.setTextColor(Color.BLACK);
+            holder.noteDescription.setTextColor(Color.BLACK);
+        }
         holder.noteTitle.setText(currentNote.getTitle());
         holder.notePriority.setText(String.valueOf(currentNote.getPriority()));
         holder.noteDescription.setText(currentNote.getDescription());

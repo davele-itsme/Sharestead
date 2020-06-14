@@ -14,7 +14,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/favouriteCheckBox"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/back_arrow"
             android:scaleType="fitStart"
@@ -30,14 +29,31 @@
 
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/noteTitle"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/general_margin"
-        android:background="@android:color/transparent"
-        android:hint="@string/name"
-        android:inputType="text" />
+        android:layout_marginTop="@dimen/general_margin">
+
+        <EditText
+            android:id="@+id/noteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/notePriority"
+            android:background="@android:color/transparent"
+            android:hint="@string/name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/notePriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent"
+            android:hint="@string/priority"
+            android:inputType="number" />
+
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/noteDescription"

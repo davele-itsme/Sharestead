@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shareFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/shareFragment"
     tools:context=".view.HomeFragment">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/noteRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/note_item"/>
+        android:padding="10dp"
+        tools:listitem="@layout/note_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_add"
+        android:layout_marginEnd="@dimen/general_margin"
         android:layout_marginBottom="100dp"
-        android:layout_marginEnd="@dimen/general_margin" />
+        android:src="@drawable/ic_add" />
 
 </FrameLayout>
