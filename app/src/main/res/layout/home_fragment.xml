@@ -36,6 +36,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/welcome1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -45,6 +46,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/welcome2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -54,6 +56,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/welcome3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

@@ -65,7 +65,7 @@
         android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/addNoteBtn"
+        android:id="@+id/saveChangesBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

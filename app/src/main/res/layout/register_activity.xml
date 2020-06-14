@@ -19,6 +19,7 @@
                 app:srcCompat="@drawable/ic_logo" />
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -90,7 +91,7 @@
                     android:background="@color/gray" />
 
                 <TextView
-                    android:id="@+id/registerReference"
+                    android:id="@+id/loginReference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -107,7 +108,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/userAgreement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

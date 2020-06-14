@@ -29,7 +29,7 @@ public class AddNoteDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.note_dialog, null);
         builder.setView(view);
 
-        Button addNoteBtn = view.findViewById(R.id.addNoteBtn);
+        Button addNoteBtn = view.findViewById(R.id.saveChangesBtn);
         EditText title = view.findViewById(R.id.noteTitle);
         EditText priority = view.findViewById(R.id.notePriority);
         EditText description = view.findViewById(R.id.noteDescription);

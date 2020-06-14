@@ -55,6 +55,24 @@ public class AuthenticationActivityTest {
     }
 
     @Test
+    public void testLoginButtonWrongCredentials() {
+        onView(withId(R.id.emailField)).perform(replaceText("wrong@email.com"));
+        onView(withId(R.id.passwordField)).perform(replaceText("1234567"));
+
+        onView(withId(R.id.logInBtn)).perform(click());
+        SystemClock.sleep(3000);
+
+        onView(withText("Error with login")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testEmptyFieldsLogin()
+    {
+        onView(withId(R.id.logInBtn)).perform(click());
+        onView(withId(R.id.authenticationLayout)).check(matches(isDisplayed()));
+    }
+
+    @Test
     public void testForgotPassword() {
         onView(withId(R.id.forgotPassword)).perform(click());
         onView(withText("Recover password")).check(matches(isDisplayed()));
@@ -72,6 +90,8 @@ public class AuthenticationActivityTest {
         onView(withId(R.id.registerReference)).perform(click());
         onView(withId(R.id.registerLayout)).check(matches(isDisplayed()));
     }
+
+
 
 
 }
