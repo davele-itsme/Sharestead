@@ -2,7 +2,6 @@ package dk.via.sharestead.view;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -39,7 +38,6 @@ public class ProfileFragment extends Fragment {
     private TextView nameText;
     private TextView emailText;
     private CircleImageView imageView;
-    private TextView settings;
     private TextView help;
     private TextView privacyPolicy;
     private static final int STORAGE_REQUEST_CODE = 100;
@@ -99,7 +97,6 @@ public class ProfileFragment extends Fragment {
         nameText = view.findViewById(R.id.profileName);
         emailText = view.findViewById(R.id.profileEmail);
         imageView = view.findViewById(R.id.profileImage);
-        settings = view.findViewById(R.id.settings);
         help = view.findViewById(R.id.help);
         privacyPolicy = view.findViewById(R.id.privacyPolicy);
     }
@@ -218,28 +215,25 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.name_dialog, null);
         EditText nameField = view.findViewById(R.id.nameEditText);
         builder.setView(view)
-                .setPositiveButton("Change", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String name = nameField.getText().toString();
-                        if (!TextUtils.isEmpty(name)) {
-                            progressDialog.show(getActivity().getSupportFragmentManager(), TAG);
-                            profileViewModel.changeName(name);
-                            profileViewModel.getUpdateName().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-                                @Override
-                                public void onChanged(Boolean aBoolean) {
-                                    if (aBoolean) {
-                                        nameText.setText(name);
-                                        Toast.makeText(getContext(), "Name successfully updated", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(getContext(), "Error with updating name", Toast.LENGTH_SHORT).show();
-                                    }
-                                    progressDialog.dismiss();
+                .setPositiveButton("Change", (dialog, which) -> {
+                    String name = nameField.getText().toString();
+                    if (!TextUtils.isEmpty(name)) {
+                        progressDialog.show(getActivity().getSupportFragmentManager(), TAG);
+                        profileViewModel.changeName(name);
+                        profileViewModel.getUpdateName().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+                            @Override
+                            public void onChanged(Boolean aBoolean) {
+                                if (aBoolean) {
+                                    nameText.setText(name);
+                                    Toast.makeText(getContext(), "Name successfully updated", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Error with updating name", Toast.LENGTH_SHORT).show();
                                 }
-                            });
-                        } else {
-                            Toast.makeText(getContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
-                        }
+                                progressDialog.dismiss();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("Cancel",
