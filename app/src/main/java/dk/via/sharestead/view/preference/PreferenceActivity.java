@@ -33,7 +33,7 @@ public class PreferenceActivity extends AppCompatActivity implements PlatformSli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preference_activity);
 
-        displayPreference();
+//        displayPreference();
 
         checkFirstTime();
 
