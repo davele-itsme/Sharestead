@@ -1,7 +1,7 @@
 <!-- INTRODUCTION -->
 <br />
 <p align="center">
-[![Watch the video](https://user-images.githubusercontent.com/42817904/117037136-72101e00-ad06-11eb-8a5c-24129339b3cb.png)](https://youtu.be/Pb1qB4GzyJk)
+[![](https://user-images.githubusercontent.com/42817904/117037136-72101e00-ad06-11eb-8a5c-24129339b3cb.png)](https://youtu.be/Pb1qB4GzyJk)
   <h2 align="center">SHARESTEAD</h2>
   <p align="center">
   Android application built for Android development assignment
