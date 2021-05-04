@@ -72,7 +72,9 @@ Application runs on Android version 6.0 Marshmallow - 9.0 Pie
 2. Open the project in Android Studio
 3. The application uses Google Firebase, therefore follow this tutorial [google-services.json tutorial](https://www.youtube.com/watch?v=kts-yg-2vkg)
 4. Once you have it, replace google-services.json in the `app` folder
-5. Run the application using either mobile phone/tablet or virtual device provided by AVD manager
+5. EDIT 4.5.2021: RAWG newly requires API key, therefore you need to have an account there. Follow this site to create API key [RAWG](https://rawg.io/apidocs). There will be needed a small tweak in code to adjust API calls.
+![image](https://user-images.githubusercontent.com/42817904/117043931-1d70a100-ad0e-11eb-8029-63168151715b.png)
+7. Run the application using either mobile phone/tablet or virtual device provided by AVD manager
 
 ## Inspiration
 I got some inspiration from these source codes/guides: <br />
