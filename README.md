@@ -55,7 +55,7 @@ Android application, that would create a game community.
 
 The application is not published, therefore you need to build the game in Android Studio.
 
-Application runs on Android version 5.0 Lollipop - 9.0 Pie (Not tested on other versions)
+Application runs on Android version 6.0 Marshmallow - 9.0 Pie
 
 ### Prerequisites
 
