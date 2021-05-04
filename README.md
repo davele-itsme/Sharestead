@@ -48,8 +48,9 @@ Android application, that would create a game community.
 
 ### Built With
 
-* [Android Studio](https://developer.android.com/studio)
-* [Firebase](https://firebase.google.com/)
+* [Android Studio](https://developer.android.com/studio) - official IDE for Google's Android operating system
+* [Firebase](https://firebase.google.com/) - Authentication and realtime database
+* [Retrofit](https://square.github.io/retrofit/) -  HTTP client for Android and Java
 
 <!-- GETTING STARTED -->
 ## Getting Started
