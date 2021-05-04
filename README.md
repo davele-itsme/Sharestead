@@ -48,7 +48,8 @@ Android application, that would create a game community.
 
 ### Built With
 
-* [AndroidStudio](https://developer.android.com/studio)
+* [Android Studio](https://developer.android.com/studio)
+* [Firebase](https://firebase.google.com/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -59,7 +60,8 @@ Application runs on Android version 6.0 Marshmallow - 9.0 Pie
 
 ### Prerequisites
 
-* [AndroidStudio](https://developer.android.com/studio)
+* [Android Studio](https://developer.android.com/studio)
+* [Google Account](https://console.firebase.google.com/u/0/) - To access Google Firebase console
 
 ### Installation
 
@@ -68,8 +70,8 @@ Application runs on Android version 6.0 Marshmallow - 9.0 Pie
  git clone https://github.com/davele-itsme/Sharestead.git
   ```
 2. Open the project in Android Studio
-3. The application uses Google Maps Android API. Follow: Google Maps to set up the API key.
-4. Once you have API key, put it inside res/values/google_maps_api.xml file.
+3. The application uses Google Firebase, therefore follow this tutorial [google-services.json tutorial](https://www.youtube.com/watch?v=kts-yg-2vkg)
+4. Once you have it, replace google-services.json in the `app` folder
 5. Run the application using either mobile phone/tablet or virtual device provided by AVD manager
 
 ## Inspiration
