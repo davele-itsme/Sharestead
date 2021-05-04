@@ -1,7 +1,9 @@
 <!-- INTRODUCTION -->
 <br />
 <p align="center">
-[![](https://img.youtube.com/vi/Pb1qB4GzyJk/0.jpg)](https://youtu.be/Pb1qB4GzyJk)
+  <a href ="https://www.youtube.com/watch?v=Pb1qB4GzyJk">
+    <img src="https://img.youtube.com/vi/Pb1qB4GzyJk/0.jpg"/>
+  </a>
   <h2 align="center">SHARESTEAD</h2>
   <p align="center">
   Android application built for Android development assignment
