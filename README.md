@@ -46,6 +46,12 @@ Android application, that would create a game community.
 * Note management for games
 * Profile customization in the application
 
+<strong>Implementation:</strong>
+* MVVM architecture
+* Shared preferences
+* Web services 
+* RecyclerViews
+
 ### Built With
 
 * [Android Studio](https://developer.android.com/studio) - official IDE for Google's Android operating system
